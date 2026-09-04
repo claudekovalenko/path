@@ -1,389 +1,179 @@
 <title>Five Exits, One Road</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Overpass:wght@400;600;800&family=Overpass+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Overpass:wght@400;600;800&family=Overpass+Mono:wght@400;600&display=swap">
 <style>
   :root{
-    --ground:#EAECEF;
-    --surface:#FFFFFF;
-    --surface-2:#F3F5F7;
-    --ink:#111721;
-    --ink-soft:#4B5462;
-    --ink-faint:#77808E;
-    --rule:#D3D8DE;
-    --rule-strong:#B6BDC6;
-    --sign:#15603C;
-    --sign-ink:#FFFFFF;
-    --amber:#B77410;
-    --amber-bright:#E39A2B;
-    --amber-wash:#F6EBD8;
-    --shadow:0 1px 2px rgba(17,23,33,.06), 0 8px 24px -14px rgba(17,23,33,.28);
+    --ground:#EAECEF; --surface:#FFFFFF; --surface-2:#F3F5F7;
+    --ink:#111721; --ink-soft:#4B5462; --ink-faint:#77808E;
+    --rule:#D3D8DE; --rule-strong:#B6BDC6;
+    --sign:#15603C; --amber:#B77410; --go:#1B7248; --stop:#B4442E;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --ground:#0B1017;
-      --surface:#131A24;
-      --surface-2:#0F1620;
-      --ink:#E6EAEF;
-      --ink-soft:#9BA5B3;
-      --ink-faint:#6F7A88;
-      --rule:#232D3B;
-      --rule-strong:#33404F;
-      --sign:#1F7C4D;
-      --sign-ink:#F2FBF5;
-      --amber:#F2B44E;
-      --amber-bright:#F2B44E;
-      --amber-wash:#231A0C;
-      --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -16px rgba(0,0,0,.8);
+      --ground:#0B1017; --surface:#131A24; --surface-2:#0F1620;
+      --ink:#E6EAEF; --ink-soft:#9BA5B3; --ink-faint:#6F7A88;
+      --rule:#232D3B; --rule-strong:#33404F;
+      --sign:#1F7C4D; --amber:#F2B44E; --go:#4FBF87; --stop:#E8836B;
     }
   }
   :root[data-theme="dark"]{
-    --ground:#0B1017;
-    --surface:#131A24;
-    --surface-2:#0F1620;
-    --ink:#E6EAEF;
-    --ink-soft:#9BA5B3;
-    --ink-faint:#6F7A88;
-    --rule:#232D3B;
-    --rule-strong:#33404F;
-    --sign:#1F7C4D;
-    --sign-ink:#F2FBF5;
-    --amber:#F2B44E;
-    --amber-bright:#F2B44E;
-    --amber-wash:#231A0C;
-    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -16px rgba(0,0,0,.8);
+    --ground:#0B1017; --surface:#131A24; --surface-2:#0F1620;
+    --ink:#E6EAEF; --ink-soft:#9BA5B3; --ink-faint:#6F7A88;
+    --rule:#232D3B; --rule-strong:#33404F;
+    --sign:#1F7C4D; --amber:#F2B44E; --go:#4FBF87; --stop:#E8836B;
   }
-
   *{box-sizing:border-box;}
   body{
-    margin:0;
-    background:var(--ground);
-    color:var(--ink);
-    font-family:"Newsreader",Georgia,"Times New Roman",serif;
-    font-size:17px;
-    line-height:1.62;
+    margin:0;background:var(--ground);color:var(--ink);
+    font-family:"Newsreader",Georgia,serif;font-size:16px;line-height:1.5;
     -webkit-font-smoothing:antialiased;
   }
-  .wrap{max-width:1080px;margin:0 auto;padding:0 22px;}
-  .col{max-width:64ch;}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 20px 64px;}
+  .sans{font-family:"Overpass",system-ui,sans-serif;}
+  .mono{font-family:"Overpass Mono",ui-monospace,monospace;}
 
-  h1,h2,h3,h4{margin:0;text-wrap:balance;}
-  .eyebrow{
-    font-family:"Overpass",system-ui,sans-serif;
-    font-weight:800;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
-    color:var(--ink-faint);margin:0;
+  /* masthead */
+  .top{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;padding:30px 0 18px;}
+  .top h1{
+    margin:0;font-family:"Overpass",sans-serif;font-weight:800;
+    font-size:clamp(21px,3.4vw,29px);letter-spacing:-.02em;text-transform:uppercase;
   }
-  .mono{font-family:"Overpass Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-numeric:tabular-nums;}
+  .top h1 em{font-style:normal;color:var(--amber);}
+  .top p{margin:0;font-family:"Overpass Mono",monospace;font-size:11.5px;color:var(--ink-faint);letter-spacing:.03em;}
 
-  /* ---------- masthead ---------- */
-  header.masthead{padding:56px 0 30px;}
-  header.masthead h1{
-    font-family:"Overpass",system-ui,sans-serif;
-    font-weight:800;
-    font-size:clamp(38px,7.2vw,68px);
-    line-height:.98;
-    letter-spacing:-.028em;
-    text-transform:uppercase;
-    margin:14px 0 0;
-  }
-  header.masthead h1 em{font-style:normal;color:var(--amber);}
-  .standfirst{
-    font-size:clamp(18px,2.3vw,21px);
-    color:var(--ink-soft);
-    margin:20px 0 0;
-    max-width:56ch;
-  }
-  .dateline{
-    display:flex;flex-wrap:wrap;gap:8px 18px;align-items:baseline;
-    margin-top:22px;padding-top:16px;border-top:1px solid var(--rule);
-    font-family:"Overpass Mono",monospace;font-size:12px;color:var(--ink-faint);
-    letter-spacing:.02em;
-  }
-
-  /* ---------- the road panel (committed to one visual world) ---------- */
+  /* road */
   .road{
-    position:relative;
-    container-type:inline-size;
-    aspect-ratio:1200/640;
-    width:100%;
-    border-radius:3px;
-    overflow:hidden;
-    background:#070B14;
-    box-shadow:0 24px 60px -34px rgba(0,0,0,.85);
+    position:relative;container-type:inline-size;aspect-ratio:1200/640;width:100%;
+    border-radius:3px;overflow:hidden;background:#070B14;
+    box-shadow:0 20px 50px -32px rgba(0,0,0,.85);
   }
   .road svg{position:absolute;inset:0;width:100%;height:100%;display:block;}
-  .ramp{transition:fill .3s ease, opacity .3s ease;}
-  .road.has-active .ramp:not(.is-active){opacity:.28;}
+  .ramp{transition:fill .3s ease,opacity .3s ease;}
+  .road.has-active .ramp:not(.is-active){opacity:.25;}
   .ramp.is-active{fill:#8A6A2E;}
   .ramp-edge{transition:opacity .3s ease;opacity:0;}
   .ramp-edge.is-active{opacity:1;}
-
-  .horizon-label{
-    position:absolute;left:50%;top:14%;transform:translateX(-50%);
-    text-align:center;pointer-events:none;width:60%;
-  }
+  .horizon-label{position:absolute;left:50%;top:14%;transform:translateX(-50%);text-align:center;pointer-events:none;width:60%;}
   .horizon-label b{
-    display:block;
-    font-family:"Overpass",sans-serif;font-weight:800;
+    display:block;font-family:"Overpass",sans-serif;font-weight:800;
     font-size:2.1cqw;letter-spacing:.42em;text-transform:uppercase;
-    color:#FFE2A8;text-indent:.42em;
-    text-shadow:0 0 26px rgba(242,180,78,.75);
+    color:#FFE2A8;text-indent:.42em;text-shadow:0 0 26px rgba(242,180,78,.75);
   }
   .horizon-label span{
-    display:block;margin-top:.75cqw;
-    font-family:"Overpass Mono",monospace;font-size:1.05cqw;
+    display:block;margin-top:.75cqw;font-family:"Overpass Mono",monospace;font-size:1.05cqw;
     color:rgba(255,232,186,.78);letter-spacing:.05em;text-shadow:0 1px 10px rgba(7,11,20,.9);
   }
-
   .hood-label{
-    position:absolute;left:50%;bottom:.9%;transform:translateX(-50%);
-    margin:0;pointer-events:none;white-space:nowrap;
-    font-family:"Overpass Mono",monospace;font-size:1.02cqw;
-    letter-spacing:.13em;text-transform:uppercase;
-    color:rgba(255,226,168,.58);
+    position:absolute;left:50%;bottom:.9%;transform:translateX(-50%);margin:0;
+    pointer-events:none;white-space:nowrap;font-family:"Overpass Mono",monospace;
+    font-size:1.02cqw;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,226,168,.58);
   }
   .sign{
-    position:absolute;
-    display:flex;flex-direction:column;align-items:stretch;
-    background:none;border:0;padding:0;margin:0;
-    cursor:pointer;text-align:left;
-    font-family:"Overpass",system-ui,sans-serif;
-    filter:drop-shadow(0 6px 14px rgba(0,0,0,.55));
+    position:absolute;display:flex;flex-direction:column;align-items:stretch;
+    background:none;border:0;padding:0;margin:0;cursor:pointer;text-align:left;
+    font-family:"Overpass",sans-serif;filter:drop-shadow(0 6px 14px rgba(0,0,0,.55));
     transition:transform .18s ease;
   }
   .sign--right{align-items:flex-end;}
   .sign:hover{transform:translateY(-2px);}
-  .sign:focus-visible{outline:2px solid #F2B44E;outline-offset:5px;border-radius:2px;}
+  .sign:focus-visible{outline:2px solid #F2B44E;outline-offset:5px;}
   .sign__tab{
-    align-self:flex-start;
-    background:#15603C;color:#fff;
-    font-weight:800;letter-spacing:.12em;text-transform:uppercase;
-    font-size:1.05cqw;padding:.35cqw .7cqw;
-    border:.15cqw solid rgba(255,255,255,.85);border-bottom:0;
-    border-radius:.25cqw .25cqw 0 0;
-    white-space:nowrap;
+    align-self:flex-start;background:#15603C;color:#fff;font-weight:800;
+    letter-spacing:.12em;text-transform:uppercase;font-size:1.05cqw;padding:.35cqw .7cqw;
+    border:.15cqw solid rgba(255,255,255,.85);border-bottom:0;border-radius:.25cqw .25cqw 0 0;white-space:nowrap;
   }
   .sign--right .sign__tab{align-self:flex-end;}
-  .sign__plate{
-    background:#15603C;
-    border:.15cqw solid rgba(255,255,255,.85);
-    border-radius:.5cqw;
-    padding:.85cqw 1.1cqw;
-    display:block;
-  }
+  .sign__plate{background:#15603C;border:.15cqw solid rgba(255,255,255,.85);border-radius:.5cqw;padding:.8cqw 1.05cqw;display:block;}
   .sign--right .sign__plate{border-top-right-radius:0;}
   .sign:not(.sign--right) .sign__plate{border-top-left-radius:0;}
-  .sign__name{
-    display:block;color:#fff;font-weight:600;
-    font-size:1.55cqw;line-height:1.15;letter-spacing:.005em;white-space:nowrap;
-  }
-  .sign__sub{
-    display:block;margin-top:.25cqw;
-    font-family:"Overpass Mono",monospace;
-    font-size:.95cqw;color:rgba(255,255,255,.72);white-space:nowrap;
-  }
-  .sign__post{
-    width:.45cqw;height:2.6cqw;background:#8E9AA6;
-    align-self:center;border-radius:0 0 1px 1px;
-  }
-  .sign[aria-pressed="true"] .sign__plate,
-  .sign[aria-pressed="true"] .sign__tab{
-    background:#F2B44E;border-color:#5A3E0B;
-  }
-  .sign[aria-pressed="true"] .sign__name{color:#201604;}
-  .sign[aria-pressed="true"] .sign__sub{color:rgba(32,22,4,.72);}
-  .sign[aria-pressed="true"] .sign__tab{color:#201604;}
-
+  .sign__name{display:block;color:#fff;font-weight:600;font-size:1.5cqw;line-height:1.15;white-space:nowrap;}
+  .sign__post{width:.45cqw;height:2.4cqw;background:#8E9AA6;align-self:center;}
+  .sign[aria-pressed="true"] .sign__plate,.sign[aria-pressed="true"] .sign__tab{background:#F2B44E;border-color:#5A3E0B;}
+  .sign[aria-pressed="true"] .sign__name,.sign[aria-pressed="true"] .sign__tab{color:#201604;}
   @container (max-width: 700px){
-    .sign__plate{display:none;}
-    .sign__post{display:none;}
+    .sign__plate,.sign__post{display:none;}
     .sign__tab{
-      border:.3cqw solid rgba(255,255,255,.9);border-radius:50%;
-      font-size:2.6cqw;width:6.2cqw;height:6.2cqw;
-      display:flex;align-items:center;justify-content:center;padding:0;
-      letter-spacing:0;
+      border:.3cqw solid rgba(255,255,255,.9);border-radius:50%;font-size:2.6cqw;
+      width:6.2cqw;height:6.2cqw;display:flex;align-items:center;justify-content:center;padding:0;letter-spacing:0;
     }
     .hood-label{font-size:2.1cqw;letter-spacing:.06em;}
     .horizon-label b{font-size:3.4cqw;}
     .horizon-label span{font-size:2cqw;}
   }
 
-  .road-caption{
-    display:flex;flex-wrap:wrap;gap:6px 20px;
-    margin-top:12px;
-    font-family:"Overpass Mono",monospace;font-size:12px;color:var(--ink-faint);
-  }
-  .road-caption b{color:var(--ink-soft);font-weight:400;}
-
-  /* ---------- exit switcher ---------- */
-  .switcher{
-    display:flex;flex-wrap:wrap;gap:8px;margin:26px 0 0;
-    padding:0;list-style:none;
-  }
+  /* switcher */
+  .switcher{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0 0;padding:0;list-style:none;}
   .switch{
-    font-family:"Overpass",sans-serif;font-size:13px;font-weight:600;
-    color:var(--ink-soft);background:var(--surface);
-    border:1px solid var(--rule);border-radius:2px;
-    padding:8px 13px;cursor:pointer;display:flex;align-items:baseline;gap:9px;
-    transition:border-color .15s ease,color .15s ease,background .15s ease;
+    font-family:"Overpass",sans-serif;font-size:12.5px;font-weight:600;color:var(--ink-soft);
+    background:var(--surface);border:1px solid var(--rule);border-radius:2px;padding:7px 12px;
+    cursor:pointer;display:flex;align-items:baseline;gap:8px;
+    transition:border-color .15s,color .15s,background .15s;
   }
-  .switch .n{font-family:"Overpass Mono",monospace;font-size:11px;color:var(--ink-faint);}
+  .switch .n{font-family:"Overpass Mono",monospace;font-size:10.5px;color:var(--ink-faint);}
   .switch:hover{border-color:var(--rule-strong);color:var(--ink);}
   .switch:focus-visible{outline:2px solid var(--amber);outline-offset:2px;}
   .switch[aria-pressed="true"]{background:var(--sign);border-color:var(--sign);color:#fff;}
   .switch[aria-pressed="true"] .n{color:rgba(255,255,255,.7);}
 
-  /* ---------- sections ---------- */
-  section{padding:64px 0 0;}
-  .sec-head{display:flex;align-items:baseline;gap:14px;border-top:2px solid var(--ink);padding-top:12px;margin-bottom:26px;}
-  .sec-head h2{
-    font-family:"Overpass",sans-serif;font-weight:800;text-transform:uppercase;
-    font-size:clamp(19px,2.5vw,25px);letter-spacing:-.01em;
-  }
-  .sec-head .mono{color:var(--ink-faint);font-size:12px;letter-spacing:.08em;margin-left:auto;}
+  /* panel */
+  .panel{margin-top:20px;border:1px solid var(--rule);background:var(--surface);min-height:250px;}
+  .panel__bar{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px;background:var(--sign);color:#fff;padding:11px 16px;font-family:"Overpass",sans-serif;}
+  .panel__bar .n{font-family:"Overpass Mono",monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.72);}
+  .panel__bar h2{margin:0;font-weight:800;font-size:clamp(15px,2.1vw,19px);text-transform:uppercase;letter-spacing:-.005em;}
+  .panel__bar .flag{margin-left:auto;font-family:"Overpass Mono",monospace;font-size:10.5px;background:rgba(255,255,255,.16);padding:3px 8px;border-radius:2px;}
+  .panel__bar .flag.drew{background:#F2B44E;color:#201604;font-weight:600;}
+  .panel__body{padding:16px 16px 18px;}
+  .panel__what{margin:0 0 14px;font-size:17px;color:var(--ink);max-width:60ch;}
+  .yrs{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);}
+  .yr{background:var(--surface-2);padding:12px 13px 14px;}
+  .yr b{display:block;font-family:"Overpass Mono",monospace;font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--amber);margin-bottom:6px;}
+  .yr span{font-size:15px;color:var(--ink-soft);}
+  .fac{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px 26px;margin-top:16px;}
+  .fac div{border-top:1px solid var(--rule-strong);padding-top:9px;}
+  .fac b{display:block;font-family:"Overpass",sans-serif;font-weight:800;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:4px;}
+  .fac .go b{color:var(--go);} .fac .stop b{color:var(--stop);}
+  .fac span{font-size:15px;color:var(--ink-soft);}
 
-  p{margin:0 0 1.05em;}
-  .lede{font-size:19px;color:var(--ink);}
-  strong{font-weight:600;}
-  .amber{color:var(--amber);}
+  /* default panel reads */
+  .reads{margin:0;padding:0;list-style:none;display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);}
+  .reads li{background:var(--surface-2);padding:13px 14px;display:grid;grid-template-columns:1.7rem 1fr;gap:10px;}
+  .reads .k{font-family:"Overpass Mono",monospace;font-size:11px;color:var(--amber);padding-top:.2em;}
+  .reads b{display:block;font-family:"Overpass",sans-serif;font-weight:600;font-size:14.5px;margin-bottom:2px;}
+  .reads span{font-size:15px;color:var(--ink-soft);}
 
-  /* constants list */
-  .constants{list-style:none;padding:0;margin:26px 0 0;display:grid;gap:1px;background:var(--rule);border-block:1px solid var(--rule);}
-  .constants li{background:var(--ground);padding:15px 2px 15px 0;display:grid;grid-template-columns:2.4rem 1fr;gap:14px;align-items:start;}
-  .constants .mk{font-family:"Overpass Mono",monospace;font-size:12px;color:var(--amber);padding-top:.35em;}
-  .constants b{font-family:"Overpass",sans-serif;font-weight:600;font-size:15px;display:block;letter-spacing:.005em;}
-  .constants span{color:var(--ink-soft);font-size:16px;}
+  /* two lists */
+  .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:26px;margin-top:34px;}
+  .cols h3{
+    margin:0 0 10px;font-family:"Overpass",sans-serif;font-weight:800;font-size:11px;
+    letter-spacing:.15em;text-transform:uppercase;color:var(--ink-faint);
+    border-bottom:1px solid var(--rule-strong);padding-bottom:8px;
+  }
+  .plain{list-style:none;margin:0;padding:0;}
+  .plain li{padding:8px 0;border-bottom:1px solid var(--rule);font-size:15.5px;color:var(--ink-soft);display:grid;grid-template-columns:1.6rem 1fr;gap:8px;}
+  .plain .k{font-family:"Overpass Mono",monospace;font-size:11px;color:var(--ink-faint);padding-top:.25em;}
+  .checks{list-style:none;margin:0;padding:0;}
+  .checks li{padding:8px 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:auto 1fr;gap:11px;align-items:start;}
+  .checks input{
+    appearance:none;width:17px;height:17px;margin:3px 0 0;border:1.5px solid var(--rule-strong);
+    border-radius:2px;background:var(--surface);cursor:pointer;position:relative;
+  }
+  .checks input:checked{background:var(--sign);border-color:var(--sign);}
+  .checks input:checked::after{content:"";position:absolute;left:5px;top:1px;width:4.5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(42deg);}
+  .checks input:focus-visible{outline:2px solid var(--amber);outline-offset:2px;}
+  .checks label{cursor:pointer;font-size:15.5px;color:var(--ink);}
+  .checks input:checked + label{color:var(--ink-faint);text-decoration:line-through;text-decoration-thickness:1px;}
 
-  /* mile markers */
-  .markers{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);}
-  .marker{background:var(--surface);padding:20px 18px 22px;}
-  .marker .mm{font-family:"Overpass Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);}
-  .marker h3{font-family:"Overpass",sans-serif;font-weight:800;font-size:15px;text-transform:uppercase;letter-spacing:.01em;margin:8px 0 10px;}
-  .marker ul{margin:0;padding-left:1.05em;color:var(--ink-soft);font-size:15.5px;}
-  .marker li{margin-bottom:.4em;}
-  .marker li::marker{color:var(--rule-strong);}
-
-  /* exits */
-  .exit{border-top:1px solid var(--rule);padding-top:0;margin-top:44px;transition:opacity .25s ease;}
-  .exit:first-of-type{margin-top:0;}
-  .exits.has-active .exit:not(.is-active){opacity:.42;}
-  .exit__bar{
-    display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 16px;
-    background:var(--sign);color:#fff;padding:13px 18px;
-    font-family:"Overpass",sans-serif;
-  }
-  .exit__num{font-family:"Overpass Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.72);}
-  .exit__bar h3{font-weight:800;font-size:clamp(17px,2.2vw,21px);text-transform:uppercase;letter-spacing:-.005em;}
-  .exit__flag{
-    margin-left:auto;font-family:"Overpass Mono",monospace;font-size:11px;
-    background:rgba(255,255,255,.16);padding:4px 9px;border-radius:2px;letter-spacing:.03em;
-  }
-  .exit__flag.is-drew{background:#F2B44E;color:#201604;font-weight:600;}
-  .exit__what{padding:20px 0 6px;font-size:18px;color:var(--ink);max-width:62ch;}
-  .exit__what .tag{
-    font-family:"Overpass Mono",monospace;font-size:11px;text-transform:uppercase;
-    letter-spacing:.1em;color:var(--amber);display:block;margin-bottom:6px;
-  }
-  .years{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin:20px 0 0;}
-  .year{background:var(--surface);padding:18px 17px 20px;}
-  .year .yr{font-family:"Overpass Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);display:block;margin-bottom:9px;}
-  .year .yr b{color:var(--amber);font-weight:600;}
-  .year p{margin:0;font-size:16px;color:var(--ink-soft);}
-  .facets{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:22px 30px;margin-top:24px;padding-bottom:6px;}
-  .facet{border-top:1px solid var(--rule-strong);padding-top:11px;}
-  .facet b{
-    display:block;font-family:"Overpass",sans-serif;font-weight:800;font-size:10.5px;
-    letter-spacing:.15em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:6px;
-  }
-  .facet p{margin:0;font-size:16px;color:var(--ink-soft);}
-  .facet--go b{color:#1F7C4D;}
-  .facet--stop b{color:#B4442E;}
-  :root[data-theme="dark"] .facet--stop b{color:#E8836B;}
-  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .facet--stop b{color:#E8836B;}}
-  .note{
-    margin-top:20px;border-left:3px solid var(--amber);background:var(--amber-wash);
-    padding:13px 16px;font-size:16px;color:var(--ink-soft);max-width:66ch;
-  }
-  .note b{color:var(--ink);}
-
-  /* table */
-  .tablewrap{overflow-x:auto;border:1px solid var(--rule);background:var(--surface);}
-  table{border-collapse:collapse;width:100%;min-width:820px;font-size:15px;}
-  th,td{text-align:left;padding:13px 15px;border-bottom:1px solid var(--rule);vertical-align:top;}
-  thead th{
-    font-family:"Overpass",sans-serif;font-weight:800;font-size:10.5px;
-    letter-spacing:.13em;text-transform:uppercase;color:var(--ink-faint);
-    background:var(--surface-2);border-bottom:1px solid var(--rule-strong);white-space:nowrap;
-  }
-  tbody th{font-family:"Overpass",sans-serif;font-weight:600;font-size:14.5px;color:var(--ink);white-space:nowrap;}
-  tbody td{color:var(--ink-soft);}
-  tbody tr:last-child th,tbody tr:last-child td{border-bottom:0;}
-
-  /* checklist */
-  .tests{list-style:none;padding:0;margin:0;display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);}
-  .test{background:var(--surface);display:grid;grid-template-columns:auto 1fr;gap:14px;padding:16px 18px;align-items:start;}
-  .test input{
-    appearance:none;width:19px;height:19px;margin:3px 0 0;
-    border:1.5px solid var(--rule-strong);border-radius:2px;background:var(--surface-2);
-    cursor:pointer;position:relative;flex:none;
-  }
-  .test input:checked{background:var(--sign);border-color:var(--sign);}
-  .test input:checked::after{
-    content:"";position:absolute;left:5.5px;top:1.5px;width:5px;height:10px;
-    border:solid #fff;border-width:0 2px 2px 0;transform:rotate(42deg);
-  }
-  .test input:focus-visible{outline:2px solid var(--amber);outline-offset:2px;}
-  .test label{cursor:pointer;font-size:16.5px;color:var(--ink);}
-  .test input:checked ~ div label{color:var(--ink-faint);text-decoration:line-through;text-decoration-thickness:1px;}
-  .test .evidence{
-    display:block;margin-top:5px;font-family:"Overpass Mono",monospace;font-size:11px;
-    color:var(--ink-faint);letter-spacing:.02em;
-  }
-  .test .evidence b{color:var(--amber);font-weight:400;}
-  .saveline{
-    margin-top:11px;font-family:"Overpass Mono",monospace;font-size:11.5px;color:var(--ink-faint);
-  }
-
-  /* closing */
-  .reads{list-style:none;padding:0;margin:24px 0 0;counter-reset:r;}
-  .reads li{
-    border-top:1px solid var(--rule);padding:18px 0;
-    display:grid;grid-template-columns:2.6rem 1fr;gap:12px;
-  }
-  .reads li::before{
-    counter-increment:r;content:counter(r,decimal-leading-zero);
-    font-family:"Overpass Mono",monospace;font-size:12px;color:var(--amber);padding-top:.3em;
-  }
-  .reads p{margin:0;max-width:62ch;}
-  .kicker{
-    margin:44px 0 0;padding:26px 0 0;border-top:2px solid var(--ink);
-    font-size:clamp(20px,2.8vw,25px);line-height:1.42;max-width:44ch;
-    font-style:italic;color:var(--ink);
-  }
-  footer{padding:56px 0 72px;margin-top:40px;border-top:1px solid var(--rule);
-    font-family:"Overpass Mono",monospace;font-size:11.5px;color:var(--ink-faint);
-    display:flex;flex-wrap:wrap;gap:6px 22px;}
-
-  @media (prefers-reduced-motion: reduce){
-    *{animation:none!important;transition:none!important;}
-  }
+  .foot{margin-top:30px;padding-top:14px;border-top:1px solid var(--rule);font-family:"Overpass Mono",monospace;font-size:11px;color:var(--ink-faint);display:flex;flex-wrap:wrap;gap:5px 18px;}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;}}
 </style>
 
 <div class="wrap">
-  <header class="masthead">
-    <p class="eyebrow">Vocational map &middot; three years &middot; drafted September 2026</p>
-    <h1>Five exits,<br><em>one road</em></h1>
-    <p class="standfirst">Every road on this map ends at the same vanishing point. The question is not which one arrives — it's which one you can carry for thirty years without becoming someone you'd not want preaching to your kids.</p>
-    <div class="dateline">
-      <span>Now: seminary</span>
-      <span>Horizon: 2029</span>
-      <span>Counsel on file: Drew &mdash; bivocational house church, or a traditional plant</span>
-      <span>Already carrying: digital systems experience</span>
-    </div>
-  </header>
-</div>
+  <div class="top">
+    <h1>Five exits, <em>one road</em></h1>
+    <p>2026 &rarr; 2029 &middot; tap a sign</p>
+  </div>
 
-<div class="wrap">
   <div class="road" id="road">
     <svg viewBox="0 0 1200 640" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
       <defs>
@@ -473,438 +263,187 @@
     </svg>
 
     <p class="hood-label">your build &middot; digital systems &mdash; the vehicle, not a road</p>
-
-    <div class="horizon-label">
-      <b>Eternity</b>
-      <span>the only destination on this map</span>
-    </div>
+    <div class="horizon-label"><b>Eternity</b><span>the only destination on this map</span></div>
 
     <button class="sign sign--right" data-exit="digital" aria-pressed="false" style="right:2%;bottom:10.5%">
-      <span class="sign__tab">Exit 1</span>
-      <span class="sign__plate">
-        <span class="sign__name">Digital ministry</span>
-        <span class="sign__sub">merge lane &mdash; not an exit</span>
-      </span>
-      <span class="sign__post" aria-hidden="true"></span>
-    </button>
-
+      <span class="sign__tab">Exit 1</span><span class="sign__plate"><span class="sign__name">Digital ministry</span></span><span class="sign__post"></span></button>
     <button class="sign" data-exit="itinerant" aria-pressed="false" style="left:2%;bottom:16.5%">
-      <span class="sign__tab">Exit 2</span>
-      <span class="sign__plate">
-        <span class="sign__name">Revival itinerant</span>
-        <span class="sign__sub">a different room each week</span>
-      </span>
-      <span class="sign__post" aria-hidden="true"></span>
-    </button>
-
+      <span class="sign__tab">Exit 2</span><span class="sign__plate"><span class="sign__name">Revival itinerant</span></span><span class="sign__post"></span></button>
     <button class="sign sign--right" data-exit="house" aria-pressed="false" style="right:2%;bottom:30%">
-      <span class="sign__tab">Exit 3</span>
-      <span class="sign__plate">
-        <span class="sign__name">Bivocational house church</span>
-        <span class="sign__sub">Drew&rsquo;s first answer</span>
-      </span>
-      <span class="sign__post" aria-hidden="true"></span>
-    </button>
-
+      <span class="sign__tab">Exit 3</span><span class="sign__plate"><span class="sign__name">Bivocational house church</span></span><span class="sign__post"></span></button>
     <button class="sign" data-exit="pastor" aria-pressed="false" style="left:2%;bottom:37%">
-      <span class="sign__tab">Exit 4</span>
-      <span class="sign__plate">
-        <span class="sign__name">Pastor, established church</span>
-        <span class="sign__sub">someone else&rsquo;s building</span>
-      </span>
-      <span class="sign__post" aria-hidden="true"></span>
-    </button>
-
+      <span class="sign__tab">Exit 4</span><span class="sign__plate"><span class="sign__name">Pastor, established</span></span><span class="sign__post"></span></button>
     <button class="sign sign--right" data-exit="plant" aria-pressed="false" style="right:2%;bottom:45%">
-      <span class="sign__tab">Exit 5</span>
-      <span class="sign__plate">
-        <span class="sign__name">Traditional church plant</span>
-        <span class="sign__sub">Drew&rsquo;s second answer</span>
-      </span>
-      <span class="sign__post" aria-hidden="true"></span>
-    </button>
+      <span class="sign__tab">Exit 5</span><span class="sign__plate"><span class="sign__name">Traditional plant</span></span><span class="sign__post"></span></button>
   </div>
-
-  <p class="road-caption">
-    <span><b>Distance from the bumper</b> = how much has to be true before you&rsquo;re actually on that road &mdash; not how good it is.</span>
-    <span><b>Dashed shoulder</b> = a lane that runs with every road, not a road of its own.</span>
-    <span><b>The hood</b> = what you already carry. Digital systems is the vehicle; it drives on all five.</span>
-  </p>
 
   <ul class="switcher" id="switcher">
     <li><button class="switch" data-exit="digital" aria-pressed="false"><span class="n">1</span>Digital ministry</button></li>
     <li><button class="switch" data-exit="itinerant" aria-pressed="false"><span class="n">2</span>Revival itinerant</button></li>
     <li><button class="switch" data-exit="house" aria-pressed="false"><span class="n">3</span>Bivocational house church</button></li>
-    <li><button class="switch" data-exit="pastor" aria-pressed="false"><span class="n">4</span>Pastor, established church</button></li>
-    <li><button class="switch" data-exit="plant" aria-pressed="false"><span class="n">5</span>Traditional church plant</button></li>
+    <li><button class="switch" data-exit="pastor" aria-pressed="false"><span class="n">4</span>Pastor, established</button></li>
+    <li><button class="switch" data-exit="plant" aria-pressed="false"><span class="n">5</span>Traditional plant</button></li>
   </ul>
 
-  <section id="constants">
-    <div class="sec-head"><h2>The road itself</h2><span class="mono">unchanged by every exit</span></div>
-    <div class="col">
-      <p class="lede">You asked for a map of where you&rsquo;re going. Before the exits: this is the part of the map that no exit changes. If these six are true, any of the five roads will hold weight. If they aren&rsquo;t, none of them will &mdash; and the bigger the platform, the faster it shows.</p>
+  <div class="panel" id="panel"></div>
+
+  <div class="cols">
+    <div>
+      <h3>The road itself &mdash; no exit changes these</h3>
+      <ul class="plain">
+        <li><span class="k">01</span>The hour nobody sees.</li>
+        <li><span class="k">02</span>Two people who knew you before.</li>
+        <li><span class="k">03</span>Someone you taught is teaching.</li>
+        <li><span class="k">04</span>The text, not your take on it.</li>
+        <li><span class="k">05</span>Household ahead of ministry.</li>
+        <li><span class="k">06</span>What you&rsquo;d still do with no audience.</li>
+      </ul>
     </div>
-    <ul class="constants">
-      <li><span class="mk">01</span><div><b>The hour nobody sees</b><span>Prayer and the text when there is no talk to prepare and no one to tell. This is the only item on the list that cannot be faked for longer than about two years.</span></div></li>
-      <li><span class="mk">02</span><div><b>People who knew you before</b><span>Two or three who remember you without a title and have standing permission to ask you anything. Name them. If the list is empty, that is the first thing to fix, before any exit.</span></div></li>
-      <li><span class="mk">03</span><div><b>Somebody discipled to the third generation</b><span>Not &ldquo;I discipled him.&rdquo; He discipled someone, and you weren&rsquo;t in the room. This is the single measurement every one of the five roads shares.</span></div></li>
-      <li><span class="mk">04</span><div><b>The text, not your take on the text</b><span>You will drift toward whatever the room rewards. The discipline is preaching what&rsquo;s actually there on a week when it isn&rsquo;t what anyone came for.</span></div></li>
-      <li><span class="mk">05</span><div><b>Your household ahead of your ministry</b><span>Every road here has a documented way of eating this, and each one eats it differently. Decide the non-negotiables now, while they cost you nothing.</span></div></li>
-      <li><span class="mk">06</span><div><b>The thing you&rsquo;d still do with no audience</b><span>Whatever remains when you subtract the platform, the salary and the invitations &mdash; that&rsquo;s the gifting. Everything below is just a delivery vehicle for it.</span></div></li>
-    </ul>
-  </section>
-
-  <section id="vehicle">
-    <div class="sec-head"><h2>The vehicle you&rsquo;re already in</h2><span class="mono">not a sixth exit</span></div>
-    <div class="col">
-      <p class="lede">You added something after the map was drawn: using your digital experience to build out systems that actually work. And then asked whether that&rsquo;s still building.</p>
-      <p><strong>It is &mdash; but it builds capacity, not people.</strong> Scaffolding is building. A system can hold a hundred people; it cannot disciple one. So it counts, and it never counts <em>instead</em>. The measurement on this map doesn&rsquo;t move: somebody you taught is teaching, in a room you weren&rsquo;t in. Nothing you ship changes that number.</p>
-      <p>Which is why it isn&rsquo;t drawn as a sixth road. Look at the picture again: the view is from the driver&rsquo;s seat. The hood at the bottom of the frame is this. It&rsquo;s the vehicle &mdash; the thing carrying you down whichever road you pick, and the reason some of those roads are reachable at all.</p>
-      <p><b>And it is not Exit 1.</b> Building an audience makes you the point. Building systems makes you deliberately invisible &mdash; the work is good precisely when nobody notices it. Different gift, different risk, different payoff. Don&rsquo;t let the lane eat the build.</p>
+    <div>
+      <h3>Next 90 days</h3>
+      <ul class="checks" id="checks">
+        <li><input type="checkbox" id="t1"><label for="t1">Preach 6 times. Log how you felt an hour after.</label></li>
+        <li><input type="checkbox" id="t2"><label for="t2">Living room, 10 weeks, co-leader named in week one.</label></li>
+        <li><input type="checkbox" id="t3"><label for="t3">Ask 3 people to be discipled. Count week ten.</label></li>
+        <li><input type="checkbox" id="t4"><label for="t4">Ask Drew: why those two, not the other three?</label></li>
+        <li><input type="checkbox" id="t5"><label for="t5">Shadow a planter a week, then a 20-year pastor.</label></li>
+        <li><input type="checkbox" id="t6"><label for="t6">Write the real monthly number you need to live on.</label></li>
+      </ul>
     </div>
+  </div>
 
-    <div class="markers" style="margin-top:28px">
-      <div class="marker">
-        <span class="mm">Effect on exit 3</span>
-        <h3>This is the difference-maker</h3>
-        <ul>
-          <li>Most bivocational planters take a job that owns their evenings &mdash; the exact hours a house church needs</li>
-          <li>Remote systems work is one of very few trades that pays a full living, travels to any city, and leaves those hours alone</li>
-          <li>If you go bivocational, this is almost certainly the job. Exit 3 just got materially more likely</li>
-        </ul>
-      </div>
-      <div class="marker">
-        <span class="mm">Effect on exit 5</span>
-        <h3>It cuts the raise</h3>
-        <ul>
-          <li>Every dollar you earn is a dollar you don&rsquo;t have to ask for</li>
-          <li>Makes you a planter who survives a funding gap instead of folding in it</li>
-          <li>Networks are chronically under-built here &mdash; it&rsquo;s also how you get known inside one</li>
-        </ul>
-      </div>
-      <div class="marker">
-        <span class="mm">Effect on exit 4</span>
-        <h3>Valuable fast &mdash; and that&rsquo;s the trap</h3>
-        <ul>
-          <li>Most established churches run duct-taped systems and will notice you immediately</li>
-          <li>Which means they will hand you all of it, and you will be the operations guy by year two</li>
-          <li>If you take this road, say up front what you will not own</li>
-        </ul>
-      </div>
-      <div class="marker">
-        <span class="mm">Effect on exits 1 &amp; 2</span>
-        <h3>Real, but low leverage</h3>
-        <ul>
-          <li>Itinerant: your calendar, contracts and follow-up stop being a mess. Useful, not decisive</li>
-          <li>Digital ministry: adjacent, and the easiest place to fool yourself that shipping is ministry</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="facets" style="margin-top:26px">
-      <div class="facet"><b>The gifting it eats</b><p>Seeing the whole flow before it exists, and caring whether it still works when you&rsquo;re not the one running it.</p></div>
-      <div class="facet"><b>What it costs</b><p>It is the most legitimate-sounding way in the world to avoid people. Building a discipleship tracker is not discipling anybody, and it feels almost identical from the inside.</p></div>
-      <div class="facet facet--go"><b>Green light</b><p>Someone else&rsquo;s ministry runs better because of something you built &mdash; and it keeps running after you stop touching it.</p></div>
-      <div class="facet facet--stop"><b>Red flag</b><p>A week where you shipped something and didn&rsquo;t sit across from a single person.</p></div>
-    </div>
-
-    <div class="years" style="margin-top:24px">
-      <div class="year"><span class="yr">Year one &middot; <b>2026&ndash;27</b></span><p>Build one system end to end, for one ministry that isn&rsquo;t yours, for free &mdash; and hand it off completely. Watch which part you actually enjoyed: the build, or the handoff. That answer tells you a great deal about all five roads.</p></div>
-      <div class="year"><span class="yr">Year two &middot; <b>2027&ndash;28</b></span><p>Decide what this is: a <em>trade</em> (contract work, a real hourly number, a client or two) or a <em>gift</em> (free, occasional, capped). Both are fine. Running it as a gift while needing it to be a trade is what makes people bitter.</p></div>
-      <div class="year"><span class="yr">Year three &middot; <b>2028&ndash;29</b></span><p>Either it is your bivocational income floor &mdash; a known monthly number that makes Exit 3 or Exit 5 survivable &mdash; or it&rsquo;s something you do twice a year for people you love. Know which by now.</p></div>
-    </div>
-  </section>
-
-  <section id="spine">
-    <div class="sec-head"><h2>Mile markers</h2><span class="mono">true on any road</span></div>
-    <div class="markers">
-      <div class="marker">
-        <span class="mm">MM 0 &middot; now</span>
-        <h3>Sep 2026</h3>
-        <ul>
-          <li>In seminary, coursework carrying the calendar</li>
-          <li>Five live options, no fork forced yet</li>
-          <li>Drew has already named two of them</li>
-        </ul>
-      </div>
-      <div class="marker">
-        <span class="mm">MM 1 &middot; year one</span>
-        <h3>2026&ndash;27</h3>
-        <ul>
-          <li>Preach or teach 10+ times, anywhere they&rsquo;ll let you</li>
-          <li>Two people you are actually discipling, by name</li>
-          <li>One older man with permission to ask you anything</li>
-          <li>Run the 90-day tests below and write down what they returned</li>
-        </ul>
-      </div>
-      <div class="marker">
-        <span class="mm">MM 2 &middot; year two</span>
-        <h3>2027&ndash;28</h3>
-        <ul>
-          <li>Degree finished or in the last stretch</li>
-          <li>Under a named coach or network, not just a mentor you admire</li>
-          <li>Ordination or planter assessment actually started &mdash; both have queues</li>
-          <li>Something you began has survived a month without you</li>
-        </ul>
-      </div>
-      <div class="marker">
-        <span class="mm">MM 3 &middot; year three</span>
-        <h3>2028&ndash;29</h3>
-        <ul>
-          <li>Full weight on one road, with the other four consciously set down</li>
-          <li>Third-generation disciple: someone you taught is teaching</li>
-          <li>You can say what you&rsquo;d do if the whole thing collapsed &mdash; and mean it</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section id="exits">
-    <div class="sec-head"><h2>The five exits</h2><span class="mono">tap a sign to isolate one</span></div>
-    <div class="exits" id="exitlist">
-
-      <article class="exit" data-exit="digital" id="exit-digital">
-        <div class="exit__bar"><span class="exit__num">Exit 1</span><h3>Digital ministry</h3><span class="exit__flag">Merge lane</span></div>
-        <p class="exit__what"><span class="tag">What it is</span>Teaching to an audience you do not pastor. It is on this map because you named it &mdash; but structurally it isn&rsquo;t an exit. It&rsquo;s a lane you can drive in on any of the other four roads, and the only one here with nobody to answer to.</p>
-        <div class="years">
-          <div class="year"><span class="yr">Year one &middot; <b>2026&ndash;27</b></span><p>One format, one audience, one question you keep answering. Ship three times a week for twelve months and do not look at the numbers weekly. Roughly 150 pieces before you are allowed an opinion about whether it works.</p></div>
-          <div class="year"><span class="yr">Year two &middot; <b>2027&ndash;28</b></span><p>If it&rsquo;s working: move people to an email list. Platforms are rented; a list is owned. Find the repeatable format and stop reinventing. First product, partnership or nothing &mdash; decide deliberately.</p></div>
-          <div class="year"><span class="yr">Year three &middot; <b>2028&ndash;29</b></span><p>It either pays for part of your life or it is a free service you provide. Both are honorable. Pretending it&rsquo;s one while running it like the other is what burns people out.</p></div>
-        </div>
-        <div class="facets">
-          <div class="facet"><b>The gifting it eats</b><p>Compression &mdash; saying something true and costly in forty-five seconds without shaving the edges off it.</p></div>
-          <div class="facet"><b>What it costs</b><p>The algorithm pays for heat. Over three years it will quietly reshape you into a person who says the thing that travels.</p></div>
-          <div class="facet facet--go"><b>Green light</b><p>People who found you online turn up somewhere in person &mdash; a room, a table, a church.</p></div>
-          <div class="facet facet--stop"><b>Red flag</b><p>Your best hour this week went to the edit instead of to a person.</p></div>
-        </div>
-        <p class="note"><b>Why it&rsquo;s drawn as a shoulder, not an exit:</b> a house church planter, a pastor, an itinerant and a church planter can all drive in this lane. Treat it as a lane and it stops competing for a decision it was never going to win &mdash; and stops being the thing you do instead of the harder road.</p>
-        <p class="note"><b>Not to be confused with building systems:</b> an audience makes you the point; a system makes you invisible on purpose. Your digital experience points at the second one far more than the first. See <a href="#vehicle" style="color:inherit">The vehicle you&rsquo;re already in</a>.</p>
-      </article>
-
-      <article class="exit" data-exit="itinerant" id="exit-itinerant">
-        <div class="exit__bar"><span class="exit__num">Exit 2</span><h3>Revival itinerant speaker</h3><span class="exit__flag">High ceiling, no floor</span></div>
-        <p class="exit__what"><span class="tag">What it is</span>Traveling preaching &mdash; camps, conferences, campus, revival meetings. You carry a message into rooms you did not build and leave before the consequences arrive.</p>
-        <div class="years">
-          <div class="year"><span class="yr">Year one &middot; <b>2026&ndash;27</b></span><p>Say yes to everything small: youth groups, chapels, camps, jails, nursing homes, the 6am men&rsquo;s breakfast. Target 25 times preached. Keep a log with one honest line each time &mdash; how you felt an hour after, not on the platform.</p></div>
-          <div class="year"><span class="yr">Year two &middot; <b>2027&ndash;28</b></span><p>Forty to sixty dates. More importantly: a home church that sends you and elders who can ground you. What kills itinerants isn&rsquo;t the travel, it&rsquo;s that no structure exists that is able to say no to them.</p></div>
-          <div class="year"><span class="yr">Year three &middot; <b>2028&ndash;29</b></span><p>Repeat invitations fill the calendar without you asking. Weeks-at-home per month fixed in advance and defended. A message you can preach on an empty tank without borrowing intensity.</p></div>
-        </div>
-        <div class="facets">
-          <div class="facet"><b>The gifting it eats</b><p>Prophetic edge and sheer stamina &mdash; plus the rarer thing: the same man off the platform as on it.</p></div>
-          <div class="facet"><b>What it costs</b><p>No congregation. Nobody sees your worst day. Statistically the highest-attrition road of the five, and the reason is structural, not moral.</p></div>
-          <div class="facet facet--go"><b>Green light</b><p>The same places invite you back without you angling for it, and they invite you back after the hard sermon.</p></div>
-          <div class="facet facet--stop"><b>Red flag</b><p>You feel most yourself on a platform and least yourself at your own kitchen table.</p></div>
-        </div>
-        <p class="note"><b>Honest note:</b> almost nobody starts here. This road is nearly always grown out of one of the other three, somewhere around year five to ten, when other people start asking for what you already carry. Trying to start here in year one usually means building an audience first &mdash; which is Exit 1 wearing a different sign.</p>
-      </article>
-
-      <article class="exit" data-exit="house" data-drew="1" id="exit-house">
-        <div class="exit__bar"><span class="exit__num">Exit 3</span><h3>Bivocational house church planter</h3><span class="exit__flag is-drew">Drew&rsquo;s first answer</span></div>
-        <p class="exit__what"><span class="tag">What it is</span>A job pays your bills. The church multiplies in living rooms. You plant by making disciples who make disciples, not by launching a service &mdash; so the unit of growth is a room of twelve, and growth means a second room, not a bigger one.</p>
-        <div class="years">
-          <div class="year"><span class="yr">Year one &middot; <b>2026&ndash;27</b></span><p>Two moves at once. Pick the trade that travels and actually pays &mdash; and given what you already carry, that is almost certainly systems and digital work rather than a licensed trade or a teaching cert, because it&rsquo;s the one that doesn&rsquo;t own your evenings. Start it. And open your living room weekly for eight to twelve people, with a co-leader from week one, not week fifty.</p></div>
-          <div class="year"><span class="yr">Year two &middot; <b>2027&ndash;28</b></span><p>Hand that room to the co-leader and start a second. The first multiplication is the entire test of this road; everything before it is just hosting. Get under a network with an actual coach (V3, Underground, Kairos, Salt &mdash; ask Drew which one he&rsquo;d put you in).</p></div>
-          <div class="year"><span class="yr">Year three &middot; <b>2028&ndash;29</b></span><p>Three or four rooms, and two leaders who came out of those rooms rather than being recruited into them. Your week is now shepherding leaders, not running meetings.</p></div>
-        </div>
-        <div class="facets">
-          <div class="facet"><b>The gifting it eats</b><p>Apostolic initiative held at low visibility for a long time &mdash; starting things nobody will applaud, and giving them away early.</p></div>
-          <div class="facet"><b>What it costs</b><p>Likely no salary from the church, ever. A split calendar. And nothing outside your city can see what you built, which is harder than it sounds at 29.</p></div>
-          <div class="facet facet--go"><b>Green light</b><p>Someone you discipled disciples someone else, in a room you weren&rsquo;t in and didn&rsquo;t schedule.</p></div>
-          <div class="facet facet--stop"><b>Red flag</b><p>You picked it because it needs nobody&rsquo;s permission, has no assessment, and nobody can fire you from it.</p></div>
-        </div>
-        <p class="note"><b>Why Drew may have said this first:</b> it is the only road on the map you can begin testing this month, at nearly zero cost, without anyone&rsquo;s approval &mdash; and it is the road that gives the most evidence about the other four. Ten weeks of a living room tells you whether you are a starter, a shepherd, or a speaker.</p>
-      </article>
-
-      <article class="exit" data-exit="pastor" id="exit-pastor">
-        <div class="exit__bar"><span class="exit__num">Exit 4</span><h3>Pastor, established church</h3><span class="exit__flag">Inherited, not founded</span></div>
-        <p class="exit__what"><span class="tag">What it is</span>Staff or lead role in a church that already exists, full of people who were there before you and will be there after. You steward something you did not start &mdash; which is a different gift from starting one, not a lesser one.</p>
-        <div class="years">
-          <div class="year"><span class="yr">Year one &middot; <b>2026&ndash;27</b></span><p>Get a residency or internship at a church you&rsquo;d be content to stay at for a decade. Preach anywhere they let you and keep the log. Learn the unglamorous half: hospital visits, budget meetings, the phone call at 11pm.</p></div>
-          <div class="year"><span class="yr">Year two &middot; <b>2027&ndash;28</b></span><p>Start the ordination track in your tradition &mdash; exams, oral councils and paperwork all move slowly, so begin before you need it. Take an associate, college or youth seat and carry real weight in it.</p></div>
-          <div class="year"><span class="yr">Year three &middot; <b>2028&ndash;29</b></span><p>Full-time staff. Forty to sixty sermons behind you. You have buried someone and married someone, and you know which one changed you more.</p></div>
-        </div>
-        <div class="facets">
-          <div class="facet"><b>The gifting it eats</b><p>Longevity and week-in teaching &mdash; and the underrated capacity to be bored well without manufacturing drama to feel alive.</p></div>
-          <div class="facet"><b>What it costs</b><p>You inherit someone else&rsquo;s building, budget and history. Change is slow and paid for entirely in trust you have not earned yet.</p></div>
-          <div class="facet facet--go"><b>Green light</b><p>Year three with the same people energizes you more than year one did. That reaction is rare and it is the whole qualification.</p></div>
-          <div class="facet facet--stop"><b>Red flag</b><p>You&rsquo;re drawn to it mainly because it&rsquo;s the option with a salary and a title attached.</p></div>
-        </div>
-        <p class="note"><b>Worth noticing:</b> this is the one road on the map you cannot simply choose. It requires a call from a congregation. That makes it the slowest to test and the easiest to drift into by default while waiting for the others to clarify.</p>
-      </article>
-
-      <article class="exit" data-exit="plant" data-drew="1" id="exit-plant">
-        <div class="exit__bar"><span class="exit__num">Exit 5</span><h3>Traditional church planter</h3><span class="exit__flag is-drew">Drew&rsquo;s second answer</span></div>
-        <p class="exit__what"><span class="tag">What it is</span>A launch team, a public gathering, outside funding, a named church in a named place. You are a founder, and for the first two years the job is far more organizational than pastoral.</p>
-        <div class="years">
-          <div class="year"><span class="yr">Year one &middot; <b>2026&ndash;27</b></span><p>Get assessed. Every network runs a gate &mdash; Acts 29, NAMB, ARC, Stadia, EFCA, your own denomination &mdash; and the queues are long, so start now. Meanwhile serve under a planter, not just a pastor. The two jobs are not the same job.</p></div>
-          <div class="year"><span class="yr">Year two &middot; <b>2027&ndash;28</b></span><p>Residency, typically 12&ndash;24 months, and this is the year that decides it. Raise support (a three-year plant budget commonly lands somewhere around $150k&ndash;$350k). Build a core team of 15&ndash;25. Pick the city and actually move there.</p></div>
-          <div class="year"><span class="yr">Year three &middot; <b>2028&ndash;29</b></span><p>Pre-launch or launch. You are now running a small organization: budget, bylaws, insurance, kids ministry, a staff hire, a lease. Preaching is maybe a fifth of the week.</p></div>
-        </div>
-        <div class="facets">
-          <div class="facet"><b>The gifting it eats</b><p>Casting vision to strangers, asking people for money without flinching, and executive follow-through when nobody is checking.</p></div>
-          <div class="facet"><b>What it costs</b><p>Two years as a fundraiser and administrator. The highest financial risk of the five. Attrition here is driven by marriage and money far more than by theology.</p></div>
-          <div class="facet facet--go"><b>Green light</b><p>People follow you somewhere costly before there is anything built to join &mdash; when all you have is the idea.</p></div>
-          <div class="facet facet--stop"><b>Red flag</b><p>You want the launch Sunday more than you want year five.</p></div>
-        </div>
-        <p class="note"><b>The overlap with Exit 3:</b> these two roads share almost everything for the first eighteen months &mdash; make disciples, gather a core, get assessed, find a coach. They diverge on one question only: <b>who pays for it.</b> Which means you do not have to answer this one yet, and you shouldn&rsquo;t force it.</p>
-      </article>
-
-    </div>
-  </section>
-
-  <section id="compare">
-    <div class="sec-head"><h2>The same five, one variable at a time</h2><span class="mono">scroll &rarr;</span></div>
-    <div class="tablewrap">
-      <table>
-        <thead>
-          <tr><th scope="col">Road</th><th scope="col">Who pays you</th><th scope="col">Who can fire you</th><th scope="col">Who&rsquo;s in the room in year three</th><th scope="col">What breaks first</th><th scope="col">Time to full weight</th></tr>
-        </thead>
-        <tbody>
-          <tr><th scope="row">Digital ministry</th><td>You, or brands and patrons</td><td>The algorithm, without notice</td><td>An audience, mostly strangers</td><td>Your attention span</td><td class="mono">3 months to start, years to matter</td></tr>
-          <tr><th scope="row">Revival itinerant</th><td>Honoraria and love offerings</td><td>Nobody, formally &mdash; which is the problem</td><td>A different room every week</td><td>Your home life</td><td class="mono">2&ndash;4 yrs to a full calendar</td></tr>
-          <tr><th scope="row">Bivocational house church</th><td>Your day job</td><td>Your employer, not the church</td><td>8&ndash;30 people whose kitchens you know</td><td>Your margin</td><td class="mono">12&ndash;18 mo to a first gathering</td></tr>
-          <tr><th scope="row">Pastor, established</th><td>The congregation</td><td>Elders, board or deacons</td><td>The same 120 people, three years older</td><td>Your patience</td><td class="mono">1&ndash;2 yrs to a full-time seat</td></tr>
-          <tr><th scope="row">Traditional plant</th><td>Donors, for two to three years</td><td>Your sending network</td><td>A launch team of 15&ndash;40</td><td>Your marriage, if unguarded</td><td class="mono">2&ndash;4 yrs to launch</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section id="tests">
-    <div class="sec-head"><h2>The next 90 days</h2><span class="mono">evidence, not feelings</span></div>
-    <div class="col">
-      <p class="lede">You can&rsquo;t think your way to the answer, and you can&rsquo;t run five experiments at once from inside a degree program. So here are eight tests, chosen because most of them return evidence on more than one road at the same time. Run them between now and December.</p>
-    </div>
-    <ul class="tests" id="testlist">
-      <li class="test"><input type="checkbox" id="t1"><div><label for="t1">Preach or teach six times, anywhere they&rsquo;ll have you. After each, write one line about how you felt an hour later &mdash; not on the platform.</label><span class="evidence">evidence on &rarr; <b>2 &middot; 3 &middot; 4 &middot; 5</b></span></div></li>
-      <li class="test"><input type="checkbox" id="t2"><div><label for="t2">Open your living room weekly for ten weeks, with a co-leader named in week one. Eight people is a full room.</label><span class="evidence">evidence on &rarr; <b>3 &middot; 5</b></span></div></li>
-      <li class="test"><input type="checkbox" id="t3"><div><label for="t3">Ask three people to be discipled. Count how many are still showing up in week ten &mdash; and whether you chased them or they came.</label><span class="evidence">evidence on &rarr; <b>all five</b></span></div></li>
-      <li class="test"><input type="checkbox" id="t4"><div><label for="t4">Sit down with Drew and ask the actual question: why those two, and not the other three? He has a read on you that isn&rsquo;t on this page yet.</label><span class="evidence">evidence on &rarr; <b>all five</b></span></div></li>
-      <li class="test"><input type="checkbox" id="t5"><div><label for="t5">Shadow one church planter for a week and one twenty-year pastor for a week. Ask both the same question: what would you do differently?</label><span class="evidence">evidence on &rarr; <b>3 &middot; 4 &middot; 5</b></span></div></li>
-      <li class="test"><input type="checkbox" id="t6"><div><label for="t6">Ship thirty pieces in sixty days without opening analytics until day sixty. Then ask whether it cost you people or gained you people.</label><span class="evidence">evidence on &rarr; <b>1</b></span></div></li>
-      <li class="test"><input type="checkbox" id="t7"><div><label for="t7">Price your life. Write the real monthly number you need to live on, then look at the table above and see which roads can actually pay it.</label><span class="evidence">evidence on &rarr; <b>all five</b></span></div></li>
-      <li class="test"><input type="checkbox" id="t8"><div><label for="t8">Name the specific job you&rsquo;d work if you went bivocational, and find out this month exactly what it takes to get it and what it pays.</label><span class="evidence">evidence on &rarr; <b>3</b></span></div></li>
-      <li class="test"><input type="checkbox" id="t9"><div><label for="t9">Build one system end-to-end for a ministry that isn&rsquo;t yours, free, and hand it off completely. Notice whether the build or the handoff was the part you liked.</label><span class="evidence">evidence on &rarr; <b>the vehicle &middot; 3 &middot; 5</b></span></div></li>
-    </ul>
-    <p class="saveline" id="saveline">Ticks are kept on this page.</p>
-  </section>
-
-  <section id="read">
-    <div class="sec-head"><h2>What the map already shows</h2><span class="mono">before you run a single test</span></div>
-    <ol class="reads">
-      <li><p><strong>Professor came off the board without a fight.</strong> When the five were laid out, that one didn&rsquo;t survive the first pass. That&rsquo;s real information &mdash; a PhD and a decade of adjuncting deserve a harder yes than you were willing to give it. Down to four.</p></li>
-      <li><p><strong>Both of Drew&rsquo;s answers were planting.</strong> He didn&rsquo;t say pastor. He didn&rsquo;t say speaker. He didn&rsquo;t say platform. Whatever he sees in you, he sees a starter &mdash; and he&rsquo;s watched you longer than a page like this can.</p></li>
-      <li><p><strong>So the real fork is two questions, not five.</strong> First: do you <em>start</em> something, or <em>steward</em> something someone else started? Then, only if you start it: <em>who pays for it</em> &mdash; a job, or donors? Everything else on this map is downstream of those two answers.</p></li>
-      <li><p><strong>Digital ministry isn&rsquo;t competing with the other four.</strong> It&rsquo;s a lane on all of them. The danger isn&rsquo;t that you choose it &mdash; it&rsquo;s that it quietly becomes the thing you do <em>instead</em> of the harder road, because it gives back a signal every single day and the harder roads give nothing back for a year.</p></li>
-      <li><p><strong>The sixth thing you named isn&rsquo;t a road &mdash; it&rsquo;s the engine.</strong> Building systems that work is the only item you&rsquo;ve mentioned that makes the two roads Drew named <em>more</em> reachable rather than competing with them. It answers the question Exits 3 and 5 actually diverge on: who pays for it. That makes it the most strategically useful thing on this page, and the least likely to be what you&rsquo;re called to.</p></li>
-      <li><p><strong>Itinerant is a destination, not a departure.</strong> Nearly everyone who does it well arrived there from one of the other three. If it&rsquo;s truly yours, it will come and find you around year five, and it will come through people who watched you pastor somebody.</p></li>
-      <li><p><strong>The three years are shorter than they look.</strong> Assessment queues, ordination exams and residencies all run 12&ndash;24 months and none of them start when you decide &mdash; they start when you apply. Whatever you pick, the paperwork for it should be moving by mid-2027.</p></li>
-    </ol>
-    <p class="kicker">The vanishing point isn&rsquo;t a career. All five roads end in the same place, and not one of them is the point &mdash; which is the only reason it&rsquo;s safe to pick one.</p>
-  </section>
-
-  <footer>
-    <span>Five Exits, One Road</span>
-    <span>Drafted Sep 2026 &middot; review at MM 1</span>
-    <span>Counsel: Drew</span>
-    <span>Revisit whenever a road stops feeling like a road</span>
-  </footer>
+  <div class="foot">
+    <span>Counsel: Drew &mdash; house church, or a plant</span>
+    <span>Carrying: digital systems</span>
+    <span id="saveline">Saved on this page</span>
+  </div>
 </div>
 
 <script>
+var EXITS = {
+  digital:{n:"Exit 1",name:"Digital ministry",flag:"Merge lane",drew:false,
+    what:"Teaching an audience you don\u2019t pastor. Structurally it isn\u2019t an exit \u2014 it\u2019s a lane that runs alongside all four roads.",
+    y1:"One format. Ship 3\u00d7 a week. 150 pieces before you judge it.",
+    y2:"Move people onto an email list you own.",
+    y3:"It pays for part of your life, or it\u2019s a free service. Pick one.",
+    cost:"The algorithm pays for heat. Over three years it reshapes what you say.",
+    go:"People who found you online show up somewhere in person.",
+    stop:"Your best hour this week went to the edit, not to a person."},
+  itinerant:{n:"Exit 2",name:"Revival itinerant",flag:"High ceiling, no floor",drew:false,
+    what:"Traveling preaching. You carry a message into rooms you didn\u2019t build and leave before the consequences arrive.",
+    y1:"Say yes to everything small. Target 25 times preached.",
+    y2:"40\u201360 dates \u2014 and elders with standing to ground you.",
+    y3:"Repeat invites fill the calendar. Weeks at home fixed in advance.",
+    cost:"No congregation. Nobody sees your worst day. Highest attrition of the five.",
+    go:"The same rooms invite you back \u2014 after the hard sermon.",
+    stop:"Most yourself on a platform, least at your own kitchen table."},
+  house:{n:"Exit 3",name:"Bivocational house church",flag:"Drew\u2019s first answer",drew:true,
+    what:"A job pays the bills; the church multiplies in living rooms. Growth means a second room, not a bigger one.",
+    y1:"Start the trade \u2014 for you, systems work. Open your living room weekly, co-leader from week one.",
+    y2:"Hand it to the co-leader and start a second. First multiplication is the whole test.",
+    y3:"Three or four rooms. Two leaders who came out of them, not recruited into them.",
+    cost:"Likely no salary from the church, ever. Nobody outside your city sees it.",
+    go:"Someone you discipled disciples someone, in a room you weren\u2019t in.",
+    stop:"You picked it because nobody can fire you from it."},
+  pastor:{n:"Exit 4",name:"Pastor, established church",flag:"Inherited, not founded",drew:false,
+    what:"Staff or lead role in a church that already exists. You steward what you didn\u2019t start \u2014 a different gift, not a lesser one.",
+    y1:"Residency at a church you\u2019d be content to stay at for ten years.",
+    y2:"Start ordination \u2014 exams and councils move slowly. Take a real seat.",
+    y3:"Full-time staff. 40\u201360 sermons. You\u2019ve buried someone and married someone.",
+    cost:"Change is slow and paid for entirely in trust you haven\u2019t earned yet.",
+    go:"Year three with the same people energizes you more than year one did.",
+    stop:"You\u2019re drawn to it because it\u2019s the one with a salary and a title."},
+  plant:{n:"Exit 5",name:"Traditional church plant",flag:"Drew\u2019s second answer",drew:true,
+    what:"Launch team, public gathering, outside funding, a named city. For two years the job is more organizational than pastoral.",
+    y1:"Get assessed \u2014 the queues are long. Serve under a planter, not a pastor.",
+    y2:"Residency. Raise roughly $150\u2013350k. Core team of 15\u201325. Move there.",
+    y3:"Launch. Budget, lease, staff, kids ministry. Preaching is a fifth of the week.",
+    cost:"Two years as a fundraiser and administrator. Highest financial risk of the five.",
+    go:"People follow you somewhere costly before there\u2019s anything built to join.",
+    stop:"You want launch Sunday more than you want year five."}
+};
+
+var DEFAULT_HTML =
+  '<div class="panel__bar"><span class="n">Start here</span><h2>What the map already shows</h2></div>' +
+  '<div class="panel__body"><ul class="reads">' +
+  '<li><span class="k">01</span><div><b>The fork is two questions, not five.</b><span>Do you start something, or steward something someone else started? Then, only if you start it: who pays for it?</span></div></li>' +
+  '<li><span class="k">02</span><div><b>Drew named both planting roads.</b><span>Not pastor, not speaker, not platform. Whatever he sees in you, he sees a starter.</span></div></li>' +
+  '<li><span class="k">03</span><div><b>Systems work isn\u2019t a road \u2014 it\u2019s the vehicle.</b><span>It\u2019s the hood at the bottom of the frame. It answers who pays for it, which is exactly what Exits 3 and 5 diverge on.</span></div></li>' +
+  '<li><span class="k">04</span><div><b>Itinerant is a destination, not a departure.</b><span>Almost nobody starts there. It arrives around year five, through people who watched you pastor somebody.</span></div></li>' +
+  '</ul></div>';
+
 (function(){
-  var STORE_KEY = "five-exits-state";
-  var state = { leaning: null, checks: {} };
-  var remote = null;
-  var writing = false;
+  var KEY="five-exits-state", state={leaning:null,checks:{}}, remote=null, writing=false;
+  var road=document.getElementById("road"), panel=document.getElementById("panel");
+  var ramps=[].slice.call(document.querySelectorAll(".ramp, .ramp-edge"));
+  var boxes=[].slice.call(document.querySelectorAll("#checks input"));
 
-  var signs = Array.prototype.slice.call(document.querySelectorAll("[data-exit]"));
-  var road = document.getElementById("road");
-  var exits = document.getElementById("exitlist");
-  var ramps = Array.prototype.slice.call(document.querySelectorAll(".ramp, .ramp-edge"));
-  var boxes = Array.prototype.slice.call(document.querySelectorAll("#testlist input[type=checkbox]"));
-  var saveline = document.getElementById("saveline");
-
-  function readLocal(){
-    try{
-      var raw = localStorage.getItem(STORE_KEY);
-      if(raw){
-        var parsed = JSON.parse(raw);
-        if(parsed && typeof parsed === "object"){
-          state.leaning = parsed.leaning || null;
-          state.checks = parsed.checks || {};
-        }
-      }
-    }catch(e){}
-  }
-  function writeLocal(){
-    try{ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }catch(e){}
-  }
-
-  function render(){
-    var active = state.leaning;
-    road.classList.toggle("has-active", !!active);
-    exits.classList.toggle("has-active", !!active);
-    signs.forEach(function(el){
-      if(el.tagName === "BUTTON"){
-        el.setAttribute("aria-pressed", el.dataset.exit === active ? "true" : "false");
-      } else {
-        el.classList.toggle("is-active", el.dataset.exit === active);
-      }
+  function esc(t){return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;");}
+  function paint(){
+    var k=state.leaning, e=k&&EXITS[k];
+    if(!e){panel.innerHTML=DEFAULT_HTML;}
+    else{
+      panel.innerHTML =
+      '<div class="panel__bar"><span class="n">'+e.n+'</span><h2>'+esc(e.name)+'</h2>'+
+      '<span class="flag'+(e.drew?" drew":"")+'">'+e.flag+'</span></div>'+
+      '<div class="panel__body">'+
+      '<p class="panel__what">'+e.what+'</p>'+
+      '<div class="yrs">'+
+      '<div class="yr"><b>Year 1 &middot; 26\u201327</b><span>'+e.y1+'</span></div>'+
+      '<div class="yr"><b>Year 2 &middot; 27\u201328</b><span>'+e.y2+'</span></div>'+
+      '<div class="yr"><b>Year 3 &middot; 28\u201329</b><span>'+e.y3+'</span></div>'+
+      '</div><div class="fac">'+
+      '<div><b>What it costs</b><span>'+e.cost+'</span></div>'+
+      '<div class="go"><b>Green light</b><span>'+e.go+'</span></div>'+
+      '<div class="stop"><b>Red flag</b><span>'+e.stop+'</span></div>'+
+      '</div></div>';
+    }
+    road.classList.toggle("has-active",!!k);
+    document.querySelectorAll("button[data-exit]").forEach(function(b){
+      b.setAttribute("aria-pressed", b.dataset.exit===k?"true":"false");
     });
-    ramps.forEach(function(p){
-      p.classList.toggle("is-active", p.dataset.ramp === active);
-    });
-    boxes.forEach(function(b){ b.checked = !!state.checks[b.id]; });
+    ramps.forEach(function(p){p.classList.toggle("is-active", p.dataset.ramp===k);});
+    boxes.forEach(function(b){b.checked=!!state.checks[b.id];});
   }
-
-  function persist(){
-    writeLocal();
-    if(remote && !writing){
-      writing = true;
-      remote.set({ leaning: state.leaning, checks: state.checks, updatedAt: Date.now() })
-        .catch(function(){})
-        .then(function(){ writing = false; });
+  function save(){
+    try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}
+    if(remote&&!writing){
+      writing=true;
+      remote.set({leaning:state.leaning,checks:state.checks,updatedAt:Date.now()})
+        .catch(function(){}).then(function(){writing=false;});
     }
   }
+  try{
+    var raw=localStorage.getItem(KEY);
+    if(raw){var p=JSON.parse(raw); if(p&&typeof p==="object"){state.leaning=p.leaning||null;state.checks=p.checks||{};}}
+  }catch(e){}
 
-  document.querySelectorAll("button[data-exit]").forEach(function(btn){
-    btn.addEventListener("click", function(){
-      var key = btn.dataset.exit;
-      state.leaning = (state.leaning === key) ? null : key;
-      render();
-      persist();
-      if(state.leaning && btn.classList.contains("switch")){
-        var target = document.getElementById("exit-" + state.leaning);
-        if(target) target.scrollIntoView({behavior:"smooth", block:"start"});
-      }
+  document.querySelectorAll("button[data-exit]").forEach(function(b){
+    b.addEventListener("click",function(){
+      state.leaning = state.leaning===b.dataset.exit ? null : b.dataset.exit;
+      paint(); save();
     });
   });
-
   boxes.forEach(function(b){
-    b.addEventListener("change", function(){
-      if(b.checked){ state.checks[b.id] = true; } else { delete state.checks[b.id]; }
-      render();
-      persist();
+    b.addEventListener("change",function(){
+      if(b.checked){state.checks[b.id]=true;}else{delete state.checks[b.id];}
+      save();
     });
   });
+  paint();
 
-  readLocal();
-  render();
-
-  if(window.claude && typeof window.claude.use === "function"){
+  if(window.claude&&typeof window.claude.use==="function"){
     window.claude.use("db").then(function(db){
-      if(!db) return;
-      var ref = db.doc("state/plan");
-      remote = ref;
-      saveline.textContent = "Ticks and your current leaning are saved — they follow you to any device you open this on.";
-      ref.onSnapshot(function(snap){
-        if(!snap || !snap.exists || !snap.data) return;
-        state.leaning = snap.data.leaning || null;
-        state.checks = snap.data.checks || {};
-        writeLocal();
-        render();
-      }, function(){});
+      if(!db)return;
+      remote=db.doc("state/plan");
+      var sl=document.getElementById("saveline");
+      if(sl) sl.textContent="Saved across your devices";
+      remote.onSnapshot(function(s){
+        if(!s||!s.exists||!s.data)return;
+        state.leaning=s.data.leaning||null; state.checks=s.data.checks||{};
+        try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}
+        paint();
+      },function(){});
     }).catch(function(){});
   }
 })();
