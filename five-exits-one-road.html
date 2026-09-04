@@ -142,6 +142,45 @@
   .reads b{display:block;font-family:"Overpass",sans-serif;font-weight:600;font-size:14.5px;margin-bottom:2px;}
   .reads span{font-size:15px;color:var(--ink-soft);}
 
+  /* timeline */
+  .tlwrap{margin-top:30px;}
+  .tlwrap h3{
+    margin:0 0 10px;font-family:"Overpass",sans-serif;font-weight:800;font-size:11px;
+    letter-spacing:.15em;text-transform:uppercase;color:var(--ink-faint);
+    border-bottom:1px solid var(--rule-strong);padding-bottom:8px;
+    display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;
+  }
+  .tlwrap h3 em{font-style:normal;color:var(--amber);letter-spacing:.08em;}
+  .tlscroll{overflow-x:auto;border:1px solid var(--rule);background:var(--rule);}
+  .tl{display:grid;grid-template-columns:132px repeat(5,minmax(150px,1fr));gap:1px;min-width:880px;}
+  .tl > *{background:var(--surface);padding:9px 11px;}
+  .tl .hd{
+    background:var(--surface-2);font-family:"Overpass Mono",monospace;font-size:10px;
+    letter-spacing:.11em;text-transform:uppercase;color:var(--ink-faint);
+  }
+  .tl .hd.beyond{color:var(--amber);}
+  .tl .rw{
+    background:var(--surface-2);font-family:"Overpass",sans-serif;font-weight:600;
+    font-size:12.5px;color:var(--ink);line-height:1.3;
+  }
+  .tl .rw small{display:block;font-family:"Overpass Mono",monospace;font-weight:400;font-size:10px;color:var(--amber);margin-top:3px;letter-spacing:.02em;}
+  .tl .c{font-size:14px;color:var(--ink-soft);line-height:1.42;}
+  .tl .c.beyond{color:var(--ink-faint);font-style:italic;}
+  .tl .c.hot{border-left:2px solid var(--amber);}
+
+  /* vision */
+  .vision{margin-top:12px;border:1px solid var(--rule);border-left:3px solid var(--amber);background:var(--surface);padding:13px 15px;}
+  .vision label{
+    display:block;font-family:"Overpass",sans-serif;font-weight:800;font-size:10px;
+    letter-spacing:.15em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:7px;
+  }
+  .vision textarea{
+    width:100%;min-height:76px;resize:vertical;border:0;background:transparent;
+    font-family:"Newsreader",Georgia,serif;font-size:16px;line-height:1.5;color:var(--ink);
+  }
+  .vision textarea:focus{outline:2px solid var(--amber);outline-offset:4px;}
+  .vision textarea::placeholder{color:var(--ink-faint);font-style:italic;}
+
   /* two lists */
   .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:26px;margin-top:34px;}
   .cols h3{
@@ -301,6 +340,15 @@
 
   <div class="panel" id="panel"></div>
 
+  <div class="tlwrap">
+    <h3>How it all lines up <em id="tlwho">&mdash; no exit selected</em></h3>
+    <div class="tlscroll"><div class="tl" id="tl"></div></div>
+    <div class="vision">
+      <label for="vision">Beyond 2029 &mdash; what God is showing you</label>
+      <textarea id="vision" placeholder="Write it here in your own words. Revise it rarely. Everything above is a route; this is the destination you keep checking it against."></textarea>
+    </div>
+  </div>
+
   <div class="cols">
     <div>
       <h3>Not optional &mdash; true before any exit</h3>
@@ -357,6 +405,7 @@ var EXITS = {
     y1:"One format. Ship 3\u00d7 a week. 150 pieces before you judge it.",
     y2:"Move people onto an email list you own.",
     y3:"It pays for part of your life, or it\u2019s a free service. Pick one.",
+    now:"Skill in hand, no rhythm.", beyond:"A lane you drive in. Never the vehicle.",
     cost:"The algorithm pays for heat. Over three years it reshapes what you say.",
     go:"People who found you online show up somewhere in person.",
     stop:"Your best hour this week went to the edit, not to a person."},
@@ -365,6 +414,7 @@ var EXITS = {
     y1:"Say yes to everything small. Target 25 times preached.",
     y2:"40\u201360 dates \u2014 and elders with standing to ground you.",
     y3:"Repeat invites fill the calendar. Weeks at home fixed in advance.",
+    now:"A handful of invitations.", beyond:"If it\u2019s yours it finds you near year five \u2014 through people who watched you pastor somebody.",
     cost:"No congregation. Nobody sees your worst day. Highest attrition of the five.",
     go:"The same rooms invite you back \u2014 after the hard sermon.",
     stop:"Most yourself on a platform, least at your own kitchen table."},
@@ -373,6 +423,7 @@ var EXITS = {
     y1:"Start the trade \u2014 for you, systems work. Open your living room weekly, co-leader from week one.",
     y2:"Hand it to the co-leader and start a second. First multiplication is the whole test.",
     y3:"Three or four rooms. Two leaders who came out of them, not recruited into them.",
+    now:"A living room, and no meeting in it.", beyond:"A network of rooms you no longer lead. Multiplication is the only metric.",
     cost:"Likely no salary from the church, ever. Nobody outside your city sees it.",
     go:"Someone you discipled disciples someone, in a room you weren\u2019t in.",
     stop:"You picked it because nobody can fire you from it."},
@@ -381,6 +432,7 @@ var EXITS = {
     y1:"Residency at a church you\u2019d be content to stay at for ten years.",
     y2:"Start ordination \u2014 exams and councils move slowly. Take a real seat.",
     y3:"Full-time staff. 40\u201360 sermons. You\u2019ve buried someone and married someone.",
+    now:"No call yet \u2014 this one isn\u2019t yours to choose alone.", beyond:"Twenty years in one place. The rarest outcome on this map, and the least celebrated.",
     cost:"Change is slow and paid for entirely in trust you haven\u2019t earned yet.",
     go:"Year three with the same people energizes you more than year one did.",
     stop:"You\u2019re drawn to it because it\u2019s the one with a salary and a title."},
@@ -389,10 +441,44 @@ var EXITS = {
     y1:"Get assessed \u2014 the queues are long. Serve under a planter, not a pastor.",
     y2:"Residency. Raise roughly $150\u2013350k. Core team of 15\u201325. Move there.",
     y3:"Launch. Budget, lease, staff, kids ministry. Preaching is a fifth of the week.",
+    now:"No assessment, no network, no city.", beyond:"The plant plants. A second church before a bigger one.",
     cost:"Two years as a fundraiser and administrator. Highest financial risk of the five.",
     go:"People follow you somewhere costly before there\u2019s anything built to join.",
     stop:"You want launch Sunday more than you want year five."}
 };
+
+var TRACKS = [
+  {k:"Formation", sub:"purity &middot; E3",
+   cells:["Name the man. Name the hour.",
+          "Weekly disclosure holding. Serving at E3 in something you didn\u2019t start.",
+          "A year clean that someone else can verify. E3 knows your money.",
+          "E3 sends you \u2014 or you know exactly why not.",
+          "The same two men, twenty years on."]},
+  {k:"Seminary", sub:"the credential",
+   cells:["Coursework carrying the calendar.",
+          "Take the preaching and homiletics load early. Write toward the road you\u2019re testing.",
+          "Finish, or final stretch. It stops being the reason you can\u2019t start.",
+          "Done. The credential is behind you, not ahead of you.",
+          "More study only if teaching turns out to be the call."]},
+  {k:"Preaching &amp; teaching", sub:"the through-line",
+   cells:["0\u20135 reps. No rhythm yet.",
+          "10\u201325 reps. Anywhere they\u2019ll have you. Log every one.",
+          "25\u201350. Repeat invitations start. A message people can name.",
+          "40\u201360 total. You can preach it on an empty tank.",
+          "Runs through all five roads. It\u2019s the gift, not the job."]},
+  {k:"Trade", sub:"digital systems",
+   cells:["Experience, unpriced.",
+          "Build one system free, end to end, and hand it off.",
+          "Decide: trade or gift. If trade \u2014 a real number and a client or two.",
+          "A known monthly floor. This is what makes Exit 3 or 5 survivable.",
+          "It funds the ministry, or it\u2019s a gift you give twice a year."]}
+];
+var ROAD_DEFAULT = ["Five options. No fork forced.",
+  "Run the 90-day tests. Get Drew\u2019s answer.",
+  "The fork commits \u2014 assessment and ordination queues start now, not when you feel ready.",
+  "Full weight on one. The other four consciously set down.",
+  "Whichever road: the same vanishing point."];
+var COLS = ["Now &middot; 2026","Year 1 &middot; 26\u201327","Year 2 &middot; 27\u201328","Year 3 &middot; 28\u201329","Beyond 2029"];
 
 var DEFAULT_HTML =
   '<div class="panel__bar"><span class="n">Start here</span><h2>What the map already shows</h2></div>' +
@@ -404,7 +490,7 @@ var DEFAULT_HTML =
   '</ul></div>';
 
 (function(){
-  var KEY="five-exits-state", state={leaning:null,checks:{}}, remote=null, writing=false;
+  var KEY="five-exits-state", state={leaning:null,checks:{},vision:""}, remote=null, writing=false;
   var road=document.getElementById("road"), panel=document.getElementById("panel");
   var ramps=[].slice.call(document.querySelectorAll(".ramp, .ramp-edge"));
   var boxes=[].slice.call(document.querySelectorAll("#checks input"));
@@ -429,6 +515,20 @@ var DEFAULT_HTML =
       '<div class="stop"><b>Red flag</b><span>'+e.stop+'</span></div>'+
       '</div></div>';
     }
+    // timeline
+    var tl=document.getElementById("tl"), who=document.getElementById("tlwho");
+    var road5 = e ? [e.now,e.y1,e.y2,e.y3,e.beyond] : ROAD_DEFAULT;
+    var h='<div class="hd"></div>';
+    COLS.forEach(function(c,i){h+='<div class="hd'+(i===4?" beyond":"")+'">'+c+'</div>';});
+    TRACKS.forEach(function(t){
+      h+='<div class="rw">'+t.k+'<small>'+t.sub+'</small></div>';
+      t.cells.forEach(function(c,i){h+='<div class="c'+(i===4?" beyond":"")+'">'+c+'</div>';});
+    });
+    h+='<div class="rw">The road<small>'+(e?esc(e.name):"not chosen yet")+'</small></div>';
+    road5.forEach(function(c,i){h+='<div class="c'+(i===4?" beyond":"")+(e?" hot":"")+'">'+c+'</div>';});
+    tl.innerHTML=h;
+    who.innerHTML = e ? "&mdash; against "+esc(e.name) : "&mdash; no exit selected";
+
     road.classList.toggle("has-active",!!k);
     document.querySelectorAll("button[data-exit]").forEach(function(b){
       b.setAttribute("aria-pressed", b.dataset.exit===k?"true":"false");
@@ -440,13 +540,13 @@ var DEFAULT_HTML =
     try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}
     if(remote&&!writing){
       writing=true;
-      remote.set({leaning:state.leaning,checks:state.checks,updatedAt:Date.now()})
+      remote.set({leaning:state.leaning,checks:state.checks,vision:state.vision||"",updatedAt:Date.now()})
         .catch(function(){}).then(function(){writing=false;});
     }
   }
   try{
     var raw=localStorage.getItem(KEY);
-    if(raw){var p=JSON.parse(raw); if(p&&typeof p==="object"){state.leaning=p.leaning||null;state.checks=p.checks||{};}}
+    if(raw){var p=JSON.parse(raw); if(p&&typeof p==="object"){state.leaning=p.leaning||null;state.checks=p.checks||{};state.vision=p.vision||"";}}
   }catch(e){}
 
   document.querySelectorAll("button[data-exit]").forEach(function(b){
@@ -461,6 +561,13 @@ var DEFAULT_HTML =
       save();
     });
   });
+  var vis=document.getElementById("vision"), vt=null;
+  vis.value=state.vision||"";
+  vis.addEventListener("input",function(){
+    state.vision=vis.value;
+    clearTimeout(vt); vt=setTimeout(save,700);
+  });
+
   paint();
 
   if(window.claude&&typeof window.claude.use==="function"){
@@ -472,6 +579,8 @@ var DEFAULT_HTML =
       remote.onSnapshot(function(s){
         if(!s||!s.exists||!s.data)return;
         state.leaning=s.data.leaning||null; state.checks=s.data.checks||{};
+        state.vision=s.data.vision||"";
+        if(document.activeElement!==vis) vis.value=state.vision;
         try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}
         paint();
       },function(){});
