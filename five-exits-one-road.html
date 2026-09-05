@@ -111,6 +111,33 @@
   }
   .legend b{color:var(--ink-soft);font-weight:400;}
 
+  /* the lens */
+  .lens{
+    margin-top:16px;border-left:3px solid var(--amber);background:var(--surface);
+    padding:11px 14px;
+  }
+  .lens b{
+    display:block;font-family:"Overpass",sans-serif;font-weight:800;font-size:10px;
+    letter-spacing:.15em;text-transform:uppercase;color:var(--amber);margin-bottom:4px;
+  }
+  .lens span{font-size:16px;color:var(--ink);}
+  .lens em{font-style:normal;color:var(--ink-faint);font-family:"Overpass Mono",monospace;font-size:11.5px;display:block;margin-top:4px;}
+
+  /* fit */
+  .fit{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:baseline;margin:0 0 14px;padding:9px 12px;background:var(--surface-2);border-left:3px solid var(--rule-strong);}
+  .fit .lvl{
+    flex:0 0 auto;align-self:flex-start;
+    font-family:"Overpass",sans-serif;font-weight:800;font-size:9.5px;letter-spacing:.14em;
+    text-transform:uppercase;padding:3px 8px;border-radius:2px;white-space:nowrap;
+  }
+  .fit .lvl.good{background:var(--go);color:#fff;}
+  .fit .lvl.mixed{background:var(--amber);color:#201604;}
+  .fit .lvl.poor{background:var(--stop);color:#fff;}
+  .fit span{font-size:15px;color:var(--ink-soft);flex:1 1 260px;}
+  .fit--good{border-left-color:var(--go);}
+  .fit--mixed{border-left-color:var(--amber);}
+  .fit--poor{border-left-color:var(--stop);}
+
   /* guardrail */
   .guard{
     margin-top:16px;border:1px solid var(--rule-strong);border-left:3px solid var(--stop);
@@ -363,6 +390,12 @@
     <li><button class="switch" data-exit="plant" aria-pressed="false"><span class="n">5</span>Traditional plant</button></li>
   </ul>
 
+  <div class="lens">
+    <b>The lens &mdash; the days you actually want</b>
+    <span>Study the word deeply, then preach or teach it. Not an exit &mdash; the test you run all five through.</span>
+    <em>You&rsquo;ve enjoyed it, and you&rsquo;ve seen it be good for you. That&rsquo;s evidence, not preference.</em>
+  </div>
+
   <div class="panel" id="panel"></div>
 
   <div class="tlwrap">
@@ -431,6 +464,7 @@ var EXITS = {
     y1:"One format. Ship 3\u00d7 a week. 150 pieces before you judge it.",
     y2:"Move people onto an email list you own.",
     y3:"It pays for part of your life, or it\u2019s a free service. Pick one.",
+    fit:{lvl:"mixed",text:"Study can be deep; the format compresses what survives. It rewards the conclusion, not the work that got you there."},
     now:"Skill in hand, no rhythm.", beyond:"A lane you drive in. Never the vehicle.",
     guard:{title:"Guardrail \u2014 no partiality (James 2)",
       lead:"The online room is more numerous, more responsive and more flattering than the room you are standing in. Partiality here won\u2019t look like snobbery \u2014 it will look like your best hour going to people who can\u2019t call you when they\u2019re sick.",
@@ -446,6 +480,7 @@ var EXITS = {
     y1:"Say yes to everything small. Target 25 times preached.",
     y2:"40\u201360 dates \u2014 and elders with standing to ground you.",
     y3:"Repeat invites fill the calendar. Weeks at home fixed in advance.",
+    fit:{lvl:"mixed",text:"High volume, narrow depth. You refine a handful of messages rather than working through texts continuously."},
     now:"A handful of invitations.", beyond:"If it\u2019s yours it finds you near year five \u2014 through people who watched you pastor somebody.",
     cost:"No congregation. Nobody sees your worst day. Highest attrition of the five.",
     go:"The same rooms invite you back \u2014 after the hard sermon.",
@@ -455,6 +490,7 @@ var EXITS = {
     y1:"Start the trade \u2014 for you, systems work. Open your living room weekly, co-leader from week one.",
     y2:"Hand it to the co-leader and start a second. First multiplication is the whole test.",
     y3:"Three or four rooms. Two leaders who came out of them, not recruited into them.",
+    fit:{lvl:"mixed",text:"The honest tension with Drew\u2019s first answer. Living-room teaching is discussion, not exposition, and a day job takes the study hours. Solvable \u2014 but only on purpose."},
     now:"A living room, and no meeting in it.", beyond:"A network of rooms you no longer lead. Multiplication is the only metric.",
     cost:"Likely no salary from the church, ever. Nobody outside your city sees it.",
     go:"Someone you discipled disciples someone, in a room you weren\u2019t in.",
@@ -464,6 +500,7 @@ var EXITS = {
     y1:"Residency at a church you\u2019d be content to stay at for ten years.",
     y2:"Start ordination \u2014 exams and councils move slowly. Take a real seat.",
     y3:"Full-time staff. 40\u201360 sermons. You\u2019ve buried someone and married someone.",
+    fit:{lvl:"good",text:"The best structural fit of the five. A weekly sermon puts study in the job description, and the same people hear you develop over years."},
     now:"No call yet \u2014 this one isn\u2019t yours to choose alone.", beyond:"Twenty years in one place. The rarest outcome on this map, and the least celebrated.",
     cost:"Change is slow and paid for entirely in trust you haven\u2019t earned yet.",
     go:"Year three with the same people energizes you more than year one did.",
@@ -473,6 +510,7 @@ var EXITS = {
     y1:"Get assessed \u2014 the queues are long. Serve under a planter, not a pastor.",
     y2:"Residency. Raise roughly $150\u2013350k. Core team of 15\u201325. Move there.",
     y3:"Launch. Budget, lease, staff, kids ministry. Preaching is a fifth of the week.",
+    fit:{lvl:"poor",text:"The worst fit for the first three years \u2014 preaching is a fifth of the week and the rest is fundraising and admin. It comes back around year five."},
     now:"No assessment, no network, no city.", beyond:"The plant plants. A second church before a bigger one.",
     cost:"Two years as a fundraiser and administrator. Highest financial risk of the five.",
     go:"People follow you somewhere costly before there\u2019s anything built to join.",
@@ -492,12 +530,12 @@ var TRACKS = [
           "Finish, or final stretch. It stops being the reason you can\u2019t start.",
           "Done. The credential is behind you, not ahead of you.",
           "More study only if teaching turns out to be the call."]},
-  {k:"Preaching &amp; teaching", sub:"the through-line",
-   cells:["0\u20135 reps. No rhythm yet.",
-          "10\u201325 reps. Anywhere they\u2019ll have you. Log every one.",
-          "25\u201350. Repeat invitations start. A message people can name.",
+  {k:"Study &amp; preaching", sub:"the lens",
+   cells:["0\u20135 reps. Study still driven by assignments.",
+          "10\u201325 reps. And a study rhythm that isn\u2019t coursework \u2014 one book, slowly, on your own clock.",
+          "25\u201350. Repeat invitations start. One text you know better than anyone in the room.",
           "40\u201360 total. You can preach it on an empty tank.",
-          "Runs through all five roads. It\u2019s the gift, not the job."]},
+          "Pick the road that protects this and it\u2019s still here at seventy."]},
   {k:"Trade", sub:"digital systems",
    cells:["Experience, unpriced.",
           "Build one system free, end to end, and hand it off.",
@@ -516,9 +554,10 @@ var DEFAULT_HTML =
   '<div class="panel__bar"><span class="n">Start here</span><h2>What the map already shows</h2></div>' +
   '<div class="panel__body"><ul class="reads">' +
   '<li><span class="k">01</span><div><b>The fork is two questions, not five.</b><span>Do you start something, or steward something someone else started? Then, only if you start it: who pays for it?</span></div></li>' +
-  '<li><span class="k">02</span><div><b>Drew named both planting roads.</b><span>Not pastor, not speaker, not platform. Whatever he sees in you, he sees a starter.</span></div></li>' +
-  '<li><span class="k">03</span><div><b>Systems work isn\u2019t a road \u2014 it\u2019s the vehicle.</b><span>It\u2019s the hood at the bottom of the frame. It answers who pays for it, which is exactly what Exits 3 and 5 diverge on.</span></div></li>' +
-  '<li><span class="k">04</span><div><b>Itinerant is a destination, not a departure.</b><span>Almost nobody starts there. It arrives around year five, through people who watched you pastor somebody.</span></div></li>' +
+  '<li><span class="k">02</span><div><b>What you want the days to be points at Exit 4.</b><span>Deep study, then preach it \u2014 the only road that puts that in the job description is pastoring an established church. Worth sitting with, because it isn\u2019t what Drew named.</span></div></li>' +
+  '<li><span class="k">03</span><div><b>Drew named both planting roads.</b><span>Not pastor, not speaker, not platform. Whatever he sees in you, he sees a starter.</span></div></li>' +
+  '<li><span class="k">04</span><div><b>Systems work isn\u2019t a road \u2014 it\u2019s the vehicle.</b><span>It\u2019s the hood at the bottom of the frame. It answers who pays for it, which is exactly what Exits 3 and 5 diverge on.</span></div></li>' +
+  '<li><span class="k">05</span><div><b>Itinerant is a destination, not a departure.</b><span>Almost nobody starts there. It arrives around year five, through people who watched you pastor somebody.</span></div></li>' +
   '</ul></div>';
 
 (function(){
@@ -537,6 +576,9 @@ var DEFAULT_HTML =
       '<span class="flag'+(e.drew?" drew":"")+'">'+e.flag+'</span></div>'+
       '<div class="panel__body">'+
       '<p class="panel__what">'+e.what+'</p>'+
+      (e.fit ? '<div class="fit fit--'+e.fit.lvl+'"><span class="lvl '+e.fit.lvl+'">'+
+        ({good:"Protects the lens",mixed:"Mixed",poor:"Eats the lens"}[e.fit.lvl])+
+        '</span><span>'+e.fit.text+'</span></div>' : '')+
       '<div class="yrs">'+
       '<div class="yr"><b>Year 1 &middot; 26\u201327</b><span>'+e.y1+'</span></div>'+
       '<div class="yr"><b>Year 2 &middot; 27\u201328</b><span>'+e.y2+'</span></div>'+
