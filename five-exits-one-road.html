@@ -262,6 +262,14 @@
     color:var(--ink);margin-bottom:3px;
   }
   .gates span{display:block;font-size:15px;color:var(--ink-soft);}
+  .gates li.prime{background:var(--surface-2);border-left-width:5px;}
+  .gates li.prime b{font-size:16px;}
+  .gates li.prime span{color:var(--ink);}
+  .gates .tag{
+    display:inline-block;font-family:"Overpass",sans-serif;font-weight:800;font-size:9px;
+    letter-spacing:.15em;text-transform:uppercase;background:var(--amber);color:#201604;
+    padding:2px 7px;border-radius:2px;margin-bottom:6px;
+  }
   .gates .why{
     display:block;margin-top:6px;font-family:"Overpass Mono",monospace;font-size:11px;
     color:var(--ink-faint);letter-spacing:.02em;line-height:1.45;
@@ -426,6 +434,12 @@
     <div>
       <h3>Not optional &mdash; true before any exit</h3>
       <ul class="gates">
+        <li class="prime">
+          <span class="tag">Most vital</span>
+          <b>Your own walk with Him.</b>
+          <span>The hour nobody sees &mdash; prayer and the word when there&rsquo;s no talk to prepare and no one to tell about it.</span>
+          <span class="why">Everything on this page is downstream of this, the gift included. It&rsquo;s also the only item here that can&rsquo;t be faked for longer than about two years.</span>
+        </li>
         <li>
           <b>Purity. Freedom from sexual sin.</b>
           <span>Not willpower &mdash; structure. One man who gets the whole truth on a set day each week, device-level filtering with someone else holding the passcode, and a plan for the specific hour it usually happens.</span>
@@ -436,17 +450,20 @@
           <span>Under it, not attending it. Someone there knows your calendar and your money, you serve in something you didn&rsquo;t start, and you can&rsquo;t go quiet for a month without a phone call.</span>
           <span class="why">Four of the five roads need a sending church. You can&rsquo;t be sent by a room you&rsquo;re not in.</span>
         </li>
+        <li>
+          <b>Disciple-making. Not a programme &mdash; names.</b>
+          <span>Two or three people you meet with on a set rhythm, who you could list right now. The aim is the third generation: someone you taught teaching someone you&rsquo;ve never met.</span>
+          <span class="why">The one measurement every road here shares, and the only one no platform can fake.</span>
+        </li>
       </ul>
 
       <h3>The road itself &mdash; no exit changes these</h3>
       <ul class="plain">
-        <li><span class="k">01</span>The hour nobody sees.</li>
-        <li><span class="k">02</span>Two people who knew you before.</li>
-        <li><span class="k">03</span>Someone you taught is teaching.</li>
-        <li><span class="k">04</span>The text, not your take on it.</li>
-        <li><span class="k">05</span>Household ahead of ministry.</li>
-        <li><span class="k">06</span>What you&rsquo;d still do with no audience.</li>
-        <li><span class="k">07</span>No partiality &mdash; the room in front of you outranks the feed.</li>
+        <li><span class="k">01</span>Two people who knew you before.</li>
+        <li><span class="k">02</span>The text, not your take on it.</li>
+        <li><span class="k">03</span>Household ahead of ministry.</li>
+        <li><span class="k">04</span>What you&rsquo;d still do with no audience.</li>
+        <li><span class="k">05</span>No partiality &mdash; the room in front of you outranks the feed.</li>
       </ul>
     </div>
     <div>
@@ -551,6 +568,12 @@ var TRACKS = [
           "25\u201350. Repeat invitations start. One text you know better than anyone in the room.",
           "40\u201360 total. You can preach it on an empty tank.",
           "Pick the road that protects this and it\u2019s still here at seventy."]},
+  {k:"Disciple-making", sub:"the third generation",
+   cells:["Nobody yet, by name.",
+          "Two or three people, by name, on a rhythm you keep.",
+          "One of them leads something without you in the room.",
+          "Third generation \u2014 someone you never taught.",
+          "The only metric that survives every road on this map."]},
   {k:"Trade", sub:"digital systems",
    cells:["Experience, unpriced.",
           "Build one system free, end to end, and hand it off.",
