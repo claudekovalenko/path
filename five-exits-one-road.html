@@ -64,6 +64,18 @@
     display:block;margin-top:.75cqw;font-family:"Overpass Mono",monospace;font-size:1.05cqw;
     color:rgba(255,232,186,.78);letter-spacing:.05em;text-shadow:0 1px 10px rgba(7,11,20,.9);
   }
+  .centre-label{
+    position:absolute;left:50%;bottom:14%;transform:translateX(-50%);margin:0;
+    pointer-events:none;white-space:nowrap;text-align:center;
+    font-family:"Overpass Mono",monospace;font-size:1.02cqw;
+    letter-spacing:.22em;text-transform:uppercase;color:rgba(232,223,200,.78);
+    padding:.6cqw 2.4cqw;
+    background:linear-gradient(90deg,rgba(7,11,20,0),rgba(7,11,20,.85) 20%,rgba(7,11,20,.85) 80%,rgba(7,11,20,0));
+  }
+  .centre-label em{
+    display:block;font-style:normal;letter-spacing:.1em;
+    font-size:.88cqw;color:rgba(232,223,200,.5);margin-top:.4cqw;
+  }
   .hood-label{
     position:absolute;left:50%;bottom:.9%;transform:translateX(-50%);margin:0;
     pointer-events:none;white-space:nowrap;font-family:"Overpass Mono",monospace;
@@ -100,6 +112,8 @@
       border:.3cqw solid rgba(255,255,255,.9);border-radius:50%;font-size:2.6cqw;
       width:6.2cqw;height:6.2cqw;display:flex;align-items:center;justify-content:center;padding:0;letter-spacing:0;
     }
+    .centre-label{font-size:2cqw;letter-spacing:.1em;}
+    .centre-label em{font-size:1.7cqw;}
     .hood-label{font-size:2.1cqw;letter-spacing:.06em;}
     .horizon-label b{font-size:3.4cqw;}
     .horizon-label span{font-size:2cqw;}
@@ -365,6 +379,7 @@
       <path d="M 0 604 C 200 621, 400 628, 600 628 C 800 628, 1000 621, 1200 604" fill="none" stroke="#F2B44E" stroke-width="1.6" stroke-opacity=".38"/>
     </svg>
 
+    <p class="centre-label">The word<em>the sword of the Spirit</em></p>
     <p class="hood-label">your build &middot; digital systems &mdash; the vehicle, not a road</p>
     <div class="horizon-label"><b>Eternity</b><span>the only destination on this map</span></div>
 
@@ -391,9 +406,9 @@
   </ul>
 
   <div class="lens">
-    <b>The lens &mdash; the days you actually want</b>
-    <span>Study the word deeply, then preach or teach it. Not an exit &mdash; the test you run all five through.</span>
-    <em>You&rsquo;ve enjoyed it, and you&rsquo;ve seen it be good for you. That&rsquo;s evidence, not preference.</em>
+    <b>The centre line &mdash; preaching the word</b>
+    <span>Study it deeply, then preach it. The sword of the Spirit &mdash; the gift given, not the preference chosen.</span>
+    <em>Sensed in prayer, and the one thing running the full length of every road here. Exits leave the road; the centre line never does.</em>
   </div>
 
   <div class="panel" id="panel"></div>
@@ -530,7 +545,7 @@ var TRACKS = [
           "Finish, or final stretch. It stops being the reason you can\u2019t start.",
           "Done. The credential is behind you, not ahead of you.",
           "More study only if teaching turns out to be the call."]},
-  {k:"Study &amp; preaching", sub:"the lens",
+  {k:"Study &amp; preaching", sub:"the centre line",
    cells:["0\u20135 reps. Study still driven by assignments.",
           "10\u201325 reps. And a study rhythm that isn\u2019t coursework \u2014 one book, slowly, on your own clock.",
           "25\u201350. Repeat invitations start. One text you know better than anyone in the room.",
@@ -554,10 +569,11 @@ var DEFAULT_HTML =
   '<div class="panel__bar"><span class="n">Start here</span><h2>What the map already shows</h2></div>' +
   '<div class="panel__body"><ul class="reads">' +
   '<li><span class="k">01</span><div><b>The fork is two questions, not five.</b><span>Do you start something, or steward something someone else started? Then, only if you start it: who pays for it?</span></div></li>' +
-  '<li><span class="k">02</span><div><b>What you want the days to be points at Exit 4.</b><span>Deep study, then preach it \u2014 the only road that puts that in the job description is pastoring an established church. Worth sitting with, because it isn\u2019t what Drew named.</span></div></li>' +
-  '<li><span class="k">03</span><div><b>Drew named both planting roads.</b><span>Not pastor, not speaker, not platform. Whatever he sees in you, he sees a starter.</span></div></li>' +
-  '<li><span class="k">04</span><div><b>Systems work isn\u2019t a road \u2014 it\u2019s the vehicle.</b><span>It\u2019s the hood at the bottom of the frame. It answers who pays for it, which is exactly what Exits 3 and 5 diverge on.</span></div></li>' +
-  '<li><span class="k">05</span><div><b>Itinerant is a destination, not a departure.</b><span>Almost nobody starts there. It arrives around year five, through people who watched you pastor somebody.</span></div></li>' +
+  '<li><span class="k">02</span><div><b>If preaching is the gift, the question just got smaller.</b><span>Not which of five callings \u2014 all five are rooms to preach in. Which room, and who pays for it. That\u2019s the whole fork.</span></div></li>' +
+  '<li><span class="k">03</span><div><b>On structure alone, that points at Exit 4.</b><span>Pastoring is the only road that puts study and a weekly sermon in the job description. Worth sitting with, because it isn\u2019t what Drew named \u2014 and a plant preaches too, just not for the first three years.</span></div></li>' +
+  '<li><span class="k">04</span><div><b>Drew named both planting roads.</b><span>Not pastor, not speaker, not platform. Whatever he sees in you, he sees a starter.</span></div></li>' +
+  '<li><span class="k">05</span><div><b>Systems work isn\u2019t a road \u2014 it\u2019s the vehicle.</b><span>It\u2019s the hood at the bottom of the frame. It answers who pays for it, which is exactly what Exits 3 and 5 diverge on.</span></div></li>' +
+  '<li><span class="k">06</span><div><b>Itinerant is a destination, not a departure.</b><span>Almost nobody starts there. It arrives around year five, through people who watched you pastor somebody.</span></div></li>' +
   '</ul></div>';
 
 (function(){
@@ -577,7 +593,7 @@ var DEFAULT_HTML =
       '<div class="panel__body">'+
       '<p class="panel__what">'+e.what+'</p>'+
       (e.fit ? '<div class="fit fit--'+e.fit.lvl+'"><span class="lvl '+e.fit.lvl+'">'+
-        ({good:"Protects the lens",mixed:"Mixed",poor:"Eats the lens"}[e.fit.lvl])+
+        ({good:"Protects it",mixed:"Mixed",poor:"Crowds it out"}[e.fit.lvl])+
         '</span><span>'+e.fit.text+'</span></div>' : '')+
       '<div class="yrs">'+
       '<div class="yr"><b>Year 1 &middot; 26\u201327</b><span>'+e.y1+'</span></div>'+
